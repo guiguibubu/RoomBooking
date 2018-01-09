@@ -1,9 +1,42 @@
 <!-- home page -->
+<!doctype html>
+<html lang="en">
 <head>
-    <script src="/client/ressources/jquery.js"></script>
-    <script src="/client/ressources/vue.js"></script>
-    <script src="/client/process.js"></script>
-    <link rel="stylesheet" href="/client/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>B00kESEO</title>
+    <script src="ressources/jquery.js"></script>
+    <script src="ressources/vue.js"></script>
+    <script src="process.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-
-1 MAX 2 FUN
+<body>
+<div id="app-3">
+    <span v-if="seen">Now you see me</span>
+</div>
+<div id="app-4">
+    <ol>
+        <li v-for="todo in todos">
+            {{ todo.text }}
+        </li>
+    </ol>
+</div>
+<div id="app-7">
+    <ol>
+        <!--
+          Now we provide each todo-item with the todo object
+          it's representing, so that its content can be dynamic.
+          We also need to provide each component with a "key",
+          which will be explained later.
+        -->
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+        </todo-item>
+    </ol>
+</div>
+</body>
+</html>
