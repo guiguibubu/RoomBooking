@@ -1,4 +1,21 @@
 /* CSS Styling */
-p {
-    color: red;
+#room-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.room {
+    padding: 10px;
+    margin: auto;
+    margin-top: 10px;
+    width: 50%;
+    height: 200px;
+    border: solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.room span {
 }

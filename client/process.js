@@ -1,42 +1,31 @@
 // Javascript functions
-let app3, app4, app7;
+let home;
+let loadedData = [
+    { id: 0, name: "Nom de la salle", number: "A-456", comment: "Au fond du couloir" },
+    { id: 1, name: "Nom de la salle de test", number: "A-4786", comment: "gauche" },
+    { id: 2, name: "Nom de la salle de testeuh", number: "B-756", comment: "couloir" },
+    { id: 3, name: "heisenedber de la salle", number: "C-14", comment: "Au fond " },
+];
 
-$(document).ready(function(){
+$(document).ready(function () {
 
-    app3 = new Vue({
-        el: '#app-3',
-        data: {
-            seen: true
-        }
+    Vue.component('room-item', {
+        props: ['room'],
+        template: '<div class="room">\n' +
+        '        <span class="room-name">{{room.name}}</span>\n' +
+        '        <span class="room-number">{{room.number}}</span>\n' +
+        '        <span class="room-comment">{{room.comment}}</span>\n' +
+        '<i class="fa fa-wifi" aria-hidden="true"></i>' +
+
+        '   </div>'
     });
 
-    app4 = new Vue({
-        el: '#app-4',
+    home = new Vue({
+        el: '#room-list',
         data: {
-            todos: [
-                { text: 'Learn JavaScript' },
-                { text: 'Learn Vue' },
-                { text: 'Build something awesome' }
-            ]
-        }
-    });
-
-    Vue.component('todo-item', {
-        props: ['todo'],
-        template: '<li><b>{{ todo.text }}</b></li>'
-    });
-
-    app7 = new Vue({
-        el: '#app-7',
-        data: {
-            groceryList: [
-                { id: 0, text: 'Vegetables' },
-                { id: 1, text: 'Cheese' },
-                { id: 2, text: 'Whatever else humans are supposed to eat' }
-            ]
+            roomList: loadedData
         }
     });
 
 
 });
-
