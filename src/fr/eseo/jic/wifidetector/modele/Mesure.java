@@ -21,6 +21,6 @@ public abstract class Mesure {
 	/*GETTER SETTER*/
 	public int getValue() {return this.value;}
 	public void setValue(int value) {this.value = value;}
-	public String getName() {if(this.name.trim().isEmpty()){this.name = "";}return this.name;}
-	public void setName(String name) {this.name = name;}
+	public String getName() {return this.name;}
+	public void setName(String name) {this.name = (name == null) ? "" : name;}
 }

@@ -1,28 +1,52 @@
 package fr.eseo.jic.wifidetector.modele;
 
-public class Salle {
+import java.util.ArrayList;
+import java.util.List;
 
-	private int largeur;
-	private int longueur;
+import fr.eseo.jic.wifidetector.modele.math.SurfaceRectangulaire;
+
+public class Salle extends SurfaceRectangulaire {
+
+	private String nom;
+	private List<ZoneMesure> listeZoneMesure;
+
+	/**
+	 * Diamètre pris en compte pour connaitre le nombre de points de mesure à faire (en mètre)
+	 */
+	public static final int DIAMETRE_MESURE = 10;
 
 	/*CONSTRUCTEURS*/
-	public Salle(int largeur, int longueur){
-		this.largeur = largeur;
-		this.longueur = longueur;
+	public Salle(int largeur, int hauteur) throws Exception{
+		super(largeur, hauteur);
+		this.listeZoneMesure = new ArrayList<ZoneMesure>();
 	}
 
-	public Salle(){
+	public Salle() throws Exception{
 		this(0,0);
 	}
 
-	int getAire(){
-		return this.largeur*this.longueur;
+	public void calculListePointMesure() throws Exception{
+		int nbPointMesureLargeur = this.getLargeur() / DIAMETRE_MESURE;
+		int nbPointMesureHauteur = this.getHauteur() / DIAMETRE_MESURE;
+		int nbPointMesure = nbPointMesureLargeur*nbPointMesureHauteur;
+
+		int largeurMesure = this.getLargeur() / nbPointMesureLargeur;
+		int hauteurMesure = this.getHauteur() / nbPointMesureHauteur;
+
+		for(int i = 0; i<nbPointMesure; i++){
+			int indexLigne = i / nbPointMesureLargeur;
+			int indexColonne = i / nbPointMesureHauteur;
+			int xZoneMesure = indexColonne*largeurMesure;
+			int yZoneMesure = indexLigne*hauteurMesure;
+			this.getListeZoneMesure().add(new ZoneMesure(xZoneMesure, yZoneMesure, largeurMesure, hauteurMesure));
+		}
 	}
 
 	/*GETTER SETTER*/
-	public int getLargeur() {return this.largeur;}
-	public void setLargeur(int largeur) {this.largeur = largeur;}
 
-	public int getLongueur() {return this.longueur;}
-	public void setLongueur(int longueur) {this.longueur = longueur;}
+	public List<ZoneMesure> getListeZoneMesure() {return this.listeZoneMesure;}
+	public void setListeZoneMesure(List<ZoneMesure> listeZoneMesure) {this.listeZoneMesure = listeZoneMesure;}
+
+	public String getNom() {return this.nom;}
+	public void setNom(String nom) {this.nom = nom;}
 }
