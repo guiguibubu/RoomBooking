@@ -15,16 +15,23 @@
 </head>
 
 <body>
-<h1>
-    B00kESEO
-</h1>
-<div id="room-list">
-    <room-item
-            v-for="item in roomList"
-            v-bind:room="item"
-            v-bind:key="item.id">
-    </room-item>
-</div>
+
+    <div id="home">
+        <span>B00kESEO</span>
+        <div id="home-btn">
+            <button id="btn-now">Maintenant</button>
+            <button id="btn-later">Pour plus tard</button>
+        </div>
+    </div>
+
+    <!-- The room list is hidden at first -->
+    <div id="room-list" style="display: none">
+        <room-item
+                v-for="item in roomList"
+                v-bind:room="item"
+                v-bind:key="item.id">
+        </room-item>
+    </div>
 
 </body>
 

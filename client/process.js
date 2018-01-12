@@ -1,4 +1,4 @@
-// Javascript functions
+// Javascript
 let home;
 let loadedData = [
     {
@@ -6,31 +6,13 @@ let loadedData = [
         name: "Nom de la salle",
         number: "A-456",
         comment: "Au fond du couloir"
-    },
-    {
-        id: 1,
-        name: "Nom de la salle de test",
-        number: "A-4786",
-        comment: "gauche"
-    },
-    {
-        id: 2,
-        name: "Nom de la salle de testeuh",
-        number: "B-756",
-        comment: "couloir"
-    },
-    {
-        id: 3,
-        name: "heisenedber de la salle",
-        number: "C-14",
-        comment: "Au fond"
     }
 ];
 
 // Exécute un appel AJAX GET
 // Prend en paramètres l'URL cible et la fonction callback appelée en cas de succès
 function ajaxGet(url, callback) {
-    var req = new XMLHttpRequest();
+    let req = new XMLHttpRequest();
     req.open("GET", url);
     req.addEventListener("load", function () {
         if (req.status >= 200 && req.status < 400) {
@@ -46,6 +28,7 @@ function ajaxGet(url, callback) {
     req.send(null);
 }
 
+// Creates the vue with the data from "loadedData"
 function fillTab(responseText) {
     loadedData = JSON.parse(responseText);
     home = new Vue({
@@ -57,10 +40,15 @@ function fillTab(responseText) {
 }
 
 
+$().ready(function () {
 
-
-$(document).ready(function () {
-
+    /* Vue component defining a room :
+    * takes a room object as prop
+    * @todo: manage case where info is missing (especially with the dots between words)
+    * @todo: link icons to a value from the room, color grading and/or differents icons
+    * @todo: "reserver" button not implemented
+    * This template is used for every room in the room list
+     */
     Vue.component('room-item', {
         props: ['room'],
         template:
@@ -78,6 +66,19 @@ $(document).ready(function () {
         '</div>'
     });
 
-    ajaxGet("http://vps316698.ovh.net/api/rooms", fillTab);
+
+    // Function getting the data from the server, hiding buttons, putting on top title and showing room list
+    $("#btn-now").click(function(){
+        ajaxGet("http://vps316698.ovh.net/api/rooms", fillTab);
+        $("#home").css("margin-top", "0%");
+        $("#home-btn").hide();
+        $("#room-list").show();
+    });
+
+
+    // Work in progress
+    $("#btn-later").click(function(){
+        alert("J'ai pas fini de faire ça non mais oh !")
+    })
 
 });
