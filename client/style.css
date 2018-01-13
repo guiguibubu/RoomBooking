@@ -1,11 +1,53 @@
 /* CSS Styling */
-h1{
-    margin: auto;
+
+#home > span {
+    text-align: center;
     color: #03438A;
     font-weight: bold;
+    font-size: 5em;
 }
 
-#room-list{
+#home {
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    margin: auto;
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#home-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#btn-later,
+#btn-now {
+    margin: 10px;
+    background-color: white;
+    border: 1px solid dodgerblue;
+    color: dodgerblue;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 20px;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+#btn-later:hover,
+#btn-now:hover {
+    background-color: dodgerblue;
+    color: white;
+}
+
+#room-list {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -24,34 +66,36 @@ h1{
     justify-content: space-between;
 }
 
-.room:hover{
+
+.room:hover {
     background-color: #e6f2ff;
 
 }
 
-.room-infos{
+.room-infos {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.room-name{
+.room-name {
     color: dodgerblue;
     font-weight: bold;
     font-size: large;
 }
 
-.room-location, .room-type{
+.room-location,
+.room-type {
     color: #404040;
 }
 
-.room-icons{
+.room-icons {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.room-book{
+.room-book {
     background-color: white;
     border: 1px solid dodgerblue;
     color: dodgerblue;
@@ -68,4 +112,24 @@ h1{
 .room-book:hover {
     background-color: dodgerblue;
     color: white;
+}
+
+/* Responsiveness */
+
+@media all and (max-width: 1200px) {
+    .room {
+        width: 90%;
+    }
+}
+
+@media all and (max-width: 400px) {
+    #home-btn {
+        flex-direction: column;
+    }
+}
+
+#pagination-container {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
 }
