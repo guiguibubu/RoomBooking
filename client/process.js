@@ -6,15 +6,12 @@ let loadedData = [
         name: "Nom de la salle",
         number: "A-456",
         comment: "Au fond du couloir"
-<<<<<<< HEAD
     },
     {
         id: 1,
         name: "test",
         number: "2",
         comment: "test"
-=======
->>>>>>> 255f0ed18dacb2814fa030b8a3067a859d41253b
     }
 ];
 
@@ -37,13 +34,8 @@ function ajaxGet(url, callback) {
     req.send(null);
 }
 
-<<<<<<< HEAD
 // Creates the vue with the data from "loadedData" and it pagination
 function fillRoomList(responseText) {
-=======
-// Creates the vue with the data from "loadedData"
-function fillTab(responseText) {
->>>>>>> 255f0ed18dacb2814fa030b8a3067a859d41253b
     loadedData = JSON.parse(responseText);
     home = new Vue({
         el: '#room-list',
@@ -51,7 +43,6 @@ function fillTab(responseText) {
             roomList: []
         }
     });
-<<<<<<< HEAD
 
     $('#pagination-container').pagination({
         dataSource: loadedData,
@@ -73,19 +64,6 @@ $().ready(function () {
      * @todo: link icons to a value from the room, color grading and/or differents icons
      * @todo: "reserver" button not implemented
      * This template is used for every room in the room list
-=======
-}
-
-
-$().ready(function () {
-
-    /* Vue component defining a room :
-    * takes a room object as prop
-    * @todo: manage case where info is missing (especially with the dots between words)
-    * @todo: link icons to a value from the room, color grading and/or differents icons
-    * @todo: "reserver" button not implemented
-    * This template is used for every room in the room list
->>>>>>> 255f0ed18dacb2814fa030b8a3067a859d41253b
      */
     Vue.component('room-item', {
         props: ['room'],
@@ -113,22 +91,8 @@ $().ready(function () {
     });
 
 
-<<<<<<< HEAD
     // Work in progress
     $("#btn-later").click(function () {
-=======
-    // Function getting the data from the server, hiding buttons, putting on top title and showing room list
-    $("#btn-now").click(function(){
-        ajaxGet("http://vps316698.ovh.net/api/rooms", fillTab);
-        $("#home").css("margin-top", "0%");
-        $("#home-btn").hide();
-        $("#room-list").show();
-    });
-
-
-    // Work in progress
-    $("#btn-later").click(function(){
->>>>>>> 255f0ed18dacb2814fa030b8a3067a859d41253b
         alert("J'ai pas fini de faire ça non mais oh !")
     })
 
