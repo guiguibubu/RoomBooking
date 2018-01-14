@@ -6,33 +6,50 @@ let loadedData = [
         name: "Nom de la salle",
         number: "A-456",
         comment: "Au fond du couloir"
-    },
-    {
-        id: 1,
-        name: "test",
-        number: "2",
-        comment: "test"
     }
 ];
 
+
+
 // Exécute un appel AJAX GET
 // Prend en paramètres l'URL cible et la fonction callback appelée en cas de succès
-function ajaxGet(url, callback) {
+function ajax(method, url, callback, body=null) {
     let req = new XMLHttpRequest();
-    req.open("GET", url);
-    req.addEventListener("load", function () {
-        if (req.status >= 200 && req.status < 400) {
-            // Appelle la fonction callback en lui passant la réponse de la requête
-            callback(req.responseText);
-        } else {
-            console.error(req.status + " " + req.statusText + " " + url);
-        }
-    });
+    req.open(method, url);
+    if(method==="PUT" || method==="POST"){
+        req.addEventListener("load", function () {
+            if (req.status >= 200 && req.status < 400 && JSON.parse(req.responseText)['done']===true) {
+                // Appelle la fonction callback en lui passant la réponse de la requête
+                callback();
+            } else {
+                console.error(req.status + " " + req.statusText + " " + url);
+            }
+        });
+    }
+    else{
+        req.addEventListener("load", function () {
+            if (req.status >= 200 && req.status < 400) {
+                // Appelle la fonction callback en lui passant la réponse de la requête
+                callback(req.responseText);
+            } else {
+                console.error(req.status + " " + req.statusText + " " + url);
+            }
+        });
+    }
+    
     req.addEventListener("error", function () {
         console.error("Erreur réseau avec l'URL " + url);
     });
-    req.send(null);
+    
+    if(method==="POST" || method==="PUT"){
+        req.setRequestHeader("Content-Type", "application/json");
+        body = JSON.stringify(body);
+        console.log(body);
+    }
+    req.send(body);
 }
+
+
 
 // Creates the vue with the data from "loadedData" and it pagination
 function fillRoomList(responseText) {
@@ -52,9 +69,20 @@ function fillRoomList(responseText) {
         className: 'paginationjs-theme-blue',
         callback: function (data, pagination) {
             home.roomList = data;
+            window.scroll(0, 0);
         }
     })
 }
+
+
+
+function Booking(start, end){
+    //format 2019-01-01 18:34:56
+    this.start = start;
+    this.end = end;
+}
+
+
 
 $().ready(function () {
 
@@ -84,7 +112,7 @@ $().ready(function () {
 
     // Function getting the data from the server, hiding buttons, putting on top title and showing room list
     $("#btn-now").click(function () {
-        ajaxGet("http://vps316698.ovh.net/api/rooms", fillRoomList);
+        ajax("GET", "http://vps316698.ovh.net/api/rooms", fillRoomList);
         $("#home").css("margin-top", "0%");
         $("#home-btn").hide();
         $("#room-list").show();
