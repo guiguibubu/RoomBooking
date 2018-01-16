@@ -16,63 +16,120 @@ public class MesureWifi {
 	
 	public static void main(String[] args) 
 	{
-		System.out.println("Signal : " + MesureWifi.getSignal("Livebox-9962"));	
-		System.out.println(MesureWifi.getAverageSpeed(10));
-		System.out.println(MesureWifi.getCurrentSsid());
+		try 
+		{
+		//System.out.println("Signal : " + MesureWifi.getSignal("Livebox-9962"));	
+		System.out.println(MesureWifi.getAverageSpeed(1));
+		System.out.println(MesureWifi.getSpeedDownFixedTime());
+		//System.out.println(MesureWifi.getCurrentSsid());
+		}
+		catch (Exception e)
+		{
+			
+		}
 	}
 	
 	/**
-	 * Télécharge un fichier de 1Mb (http://speedtest.ftp.otenet.gr/files/test1Mb.db) pour mesurer le débit entrant du réseau
+	 * Télécharge un fichier de 10Mib (http://www.ovh.net/files/10Mio.dat) pour mesurer le débit entrant du réseau
 	 * @return Vitesse en download (en kb)
+	 * @throws NoConnectedWifi Problème de connexion, voir le message retourné
 	 */
-	public static int getSpeedDown()
-	{ 
+	public static int getSpeedDown() throws NoConnectedWifi
+	{
 		try
 		{
-			final String FILE_URL = "http://speedtest.ftp.otenet.gr/files/test1Mb.db";
-			final long FILE_SIZE = 1024 * 8; // 5MB in Kilobits
-			byte[] buffer = "bonjour".getBytes();
+			final String FILE_URL = "http://www.ovh.net/files/10Mio.dat";
+			final long FILE_SIZE = 10485760*8; // Kilobits
+			byte[] buffer = "Signals that an error occurred while attempting to connect a socket to a remote address and port.".getBytes();
 	
 			long mStart, mEnd;
 			URL mUrl = new URL(FILE_URL);
 			HttpURLConnection mCon = (HttpURLConnection)mUrl.openConnection();
 			mCon.setChunkedStreamingMode(0);
 			mCon.setDoOutput(true);
-	
+		
 			if(mCon.getResponseCode() == 200) 
-			{
+			{	
 				mStart = new Date().getTime();
-	
-				InputStream input = mCon.getInputStream();
-				File f = new File("file.bin");
-				FileOutputStream fo = new FileOutputStream(f);
-				int read_len = 0;
-	
-				while((read_len = input.read(buffer)) > 0) 
+				InputStream input = mCon.getInputStream();					
+				
+				while(input.read(buffer) > 0) 
 				{
-					fo.write(buffer, 0, read_len);
+					// Empty
 				}
-				fo.close();
 				mEnd = new Date().getTime();
 				mCon.disconnect();
-	
-				return (int) (FILE_SIZE / ((mEnd - mStart) / 1000));
+				return (int) (FILE_SIZE / ((mEnd - mStart) / 1000)/1000);
 			}
+			else 
+			{
+				throw new NoConnectedWifi(mCon.getResponseMessage());
+			}
+		}
+		catch(NoConnectedWifi e)
+		{
+			throw e;
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getMessage());
-			return 0;
+			return -1;
 		}
-		return 0;
+	}
+	
+	/**
+	 * Télécharge un fichier de 1Gib (http://www.ovh.net/files/1Gb.dat) pour mesurer le débit entrant du réseau en 10 secondes
+	 * @return Vitesse en download (en kb)
+	 * @throws NoConnectedWifi Problème de connexion, voir le message retourné
+	 */
+	public static int getSpeedDownFixedTime() throws NoConnectedWifi
+	{
+		try
+		{
+			final String FILE_URL = "http://www.ovh.net/files/1Gb.dat";
+			byte[] buffer = "Signals that an error occurred while attempting to connect a socket to a remote address and port.".getBytes();
+	
+			URL mUrl = new URL(FILE_URL);
+			HttpURLConnection mCon = (HttpURLConnection)mUrl.openConnection();
+			mCon.setChunkedStreamingMode(0);
+			mCon.setDoOutput(true);
+			
+			if(mCon.getResponseCode() == 200) 
+			{								
+				InputStream input = mCon.getInputStream();					
+				int numberLoop = 0;
+				long mStart = new Date().getTime();
+				int lengthBuffer = buffer.length; // en Byte
+				
+				while(input.read(buffer) > 0 && (new Date().getTime())-mStart < 10000) 
+				{
+					numberLoop++;
+				}
+				long mEnd = new Date().getTime();
+				mCon.disconnect();
+				return (int) ((lengthBuffer*numberLoop*8) / ((mEnd - mStart) / 1000))/1000;
+			} 
+			else
+			{
+				throw new NoConnectedWifi(mCon.getResponseMessage());
+			}
+		}
+		catch (NoConnectedWifi e)
+		{
+			throw e;
+		}
+		catch(Exception e)
+		{
+			return -1;
+		}
 	}
 	
 	/**
 	 * 
 	 * @param samplesNumber Nombre d'échantillons à réaliser
 	 * @return Moyenne du débit descendant
+	 * @throws NoConnectedWifi Problème de connexion dans getSpeedDown(), voir le message retourné
 	 */
-	public static int getAverageSpeed(int samplesNumber)
+	public static int getAverageSpeed(int samplesNumber) throws NoConnectedWifi 
 	{
 		int sum = 0;
 		for(int n = 0; n < samplesNumber; n++)
