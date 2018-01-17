@@ -1,11 +1,14 @@
 package fr.eseo.jic.wifidetector.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+
+import javax.swing.SwingUtilities;
 
 public class MesureWifi {
 	
@@ -121,7 +124,7 @@ public class MesureWifi {
     			{
     				if(line.contains(SIGNAL_FR))
     				{
-    					signalDbm = line.substring(line.indexOf("Signal level=") + 13, line.indexOf(" dBm"));
+    					signalDbm = line.substring(line.indexOf("Signal level=")+13, line.indexOf(" dBm"));
     					rightSsid = false;
     					signalFound = true;
     				}	
@@ -134,9 +137,9 @@ public class MesureWifi {
         } 
         catch (Exception e)
         {
-            return dbmToPercentage(Integer.valueOf(signalDbm));
+            return dbmToPercentage(Double.valueOf(signalDbm));
         }		
-		return dbmToPercentage(Integer.valueOf(signalDbm)); 
+		return dbmToPercentage(Double.valueOf(signalDbm)); 
 	}
 	
 	/**
@@ -217,20 +220,21 @@ public class MesureWifi {
 		return ssidList;
 	}
 	
-	private static int dbmToPercentage(int signalDbm)
+	private static int dbmToPercentage(double signalDbm)
 	{
+		System.out.println(signalDbm);
 		int signalPercentage = 0;
-		if(signalDbm < 50)
-		{
-			signalPercentage = 100;
-		} 
-		else if (signalDbm > 100)
+		if (signalDbm <= -100)
 		{
 			signalPercentage = 0;
 		}
+		else if(signalDbm >= -50)
+		{
+			signalPercentage = 100;
+		} 
 		else 
 		{
-			signalPercentage = (signalDbm+100)*2;
+			signalPercentage = (int) (signalDbm+100)*2;
 		}
 		return signalPercentage;
 	}
