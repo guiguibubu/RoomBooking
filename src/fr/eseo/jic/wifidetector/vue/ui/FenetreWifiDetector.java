@@ -27,8 +27,8 @@ public class FenetreWifiDetector extends JFrame {
 	public static final String TITRE_PAR_DEFAUT = "WifiDetector";
 	public static final Color COLOR_PAR_DEFAUT = Color.WHITE;
 
-	private static final int LARGEUR_FENETRE_MIN = 710;
-	private static final int HAUTEUR_FENETRE_MIN = 300;
+	private static final int LARGEUR_FENETRE_MIN = 650;
+	private static final int HAUTEUR_FENETRE_MIN = 400;
 
 	public static final String WIFI_ETUDIANT = "Wifi_etudiants";
 
@@ -40,72 +40,82 @@ public class FenetreWifiDetector extends JFrame {
 	private JLabel labelMoyenneDebitDescendantGet;
 
 	private FenetreWifiDetector() {
-
+		// Création de la fenetere
 		this.setResizable(true);
 		this.getContentPane().setBackground(COLOR_PAR_DEFAUT);
-		//		this.setBounds(300, 300, 710, 320);
 		this.setMinimumSize(new Dimension(LARGEUR_FENETRE_MIN, HAUTEUR_FENETRE_MIN));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 		this.setTitle("WifiDetector - Informations sur le réseau");
+
 		// Label texte titre
 		this.labelInfoReseau = new JLabel("Informations sur le réseau:");
+		this.labelInfoReseau.setHorizontalAlignment(SwingConstants.CENTER);
 		this.labelInfoReseau.setForeground(Color.BLUE);
-		this.labelInfoReseau.setFont(new Font("Helvetica", Font.PLAIN, 38));
-		this.labelInfoReseau.setBounds(35, 0, 608, 46);
+		this.labelInfoReseau.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 45));
+		this.labelInfoReseau.setBounds(35, 25, 608, 46);
 		this.getContentPane().add(this.labelInfoReseau);
 		// Label texte SSID
 		this.labelSSID = new JLabel("Nom du réseau:");
-		this.labelSSID.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.labelSSID.setBounds(35, 105, 152, 29);
+		this.labelSSID.setHorizontalAlignment(SwingConstants.LEFT);
+		this.labelSSID.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		this.labelSSID.setBounds(35, 135, 152, 30);
 		this.getContentPane().add(this.labelSSID);
 		// Label texte Qualite signal
 		this.lblQualiteSignal = new JLabel("Qualité du signal (en %):");
-		this.lblQualiteSignal.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.lblQualiteSignal.setBounds(35, 139, 222, 29);
+		this.lblQualiteSignal.setHorizontalAlignment(SwingConstants.LEFT);
+		this.lblQualiteSignal.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		this.lblQualiteSignal.setBounds(35, 176, 222, 30);
 		this.getContentPane().add(this.lblQualiteSignal);
 		// Label texte Debit entrant
 		JLabel labelDebitEntrant = new JLabel("Débit entrant (en kb):");
-		labelDebitEntrant.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		labelDebitEntrant.setBounds(35, 168, 222, 29);
+		labelDebitEntrant.setHorizontalAlignment(SwingConstants.LEFT);
+		labelDebitEntrant.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		labelDebitEntrant.setBounds(35, 217, 222, 30);
 		this.getContentPane().add(labelDebitEntrant);
 
 		// Label texte Moyenne débit descendant
 		this.labelMoyenneDebitDescendant = new JLabel("Moyenne débit descendant (en kb): ");
-		this.labelMoyenneDebitDescendant.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.labelMoyenneDebitDescendant.setBounds(35, 198, 320, 29);
+		this.labelMoyenneDebitDescendant.setHorizontalAlignment(SwingConstants.LEFT);
+		this.labelMoyenneDebitDescendant.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		this.labelMoyenneDebitDescendant.setBounds(35, 258, 320, 30);
 		this.getContentPane().add(this.labelMoyenneDebitDescendant);
 		// Label version en bas
 		this.lblVersion = new JLabel("Version 1.0 2018. Tous droits réservés.");
-		this.lblVersion.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		this.lblVersion.setBounds(224, 271, 229, 22);
+		this.lblVersion.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblVersion.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 13));
+		this.lblVersion.setBounds(225, 320, 229, 22);
 		this.getContentPane().add(this.lblVersion);
-
 		// Boutton fermer fenetre
 		this.btnFermer = new JButton(new ActionMenu());
-		this.btnFermer.setHorizontalAlignment(SwingConstants.LEFT);
-		this.btnFermer.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		this.btnFermer.setBounds(638, 249, 66, 44);
-		this.btnFermer.setText("Fermer");
+		this.btnFermer.setHorizontalAlignment(SwingConstants.CENTER);
+		this.btnFermer.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 17));
+		this.btnFermer.setBounds(540, 301, 89, 61);
+		this.btnFermer.setText("Retour");
 		this.btnFermer.setActionCommand(ActionMenu.NOM_ACTION_FERMER);
 		this.getContentPane().add(this.btnFermer);
 
-		//		System.out.println("Signal : " + MesureWifi.getSignal("Livebox-jeroboam"));
-		//		System.out.println("Signal : " + MesureWifi.getSignal(MesureWifi.getCurrentSsid()));
+		// System.out.println("Signal : " +
+		// MesureWifi.getSignal("Livebox-jeroboam"));
+		// System.out.println("Signal : " +
+		// MesureWifi.getSignal(MesureWifi.getCurrentSsid()));
 		System.out.println("Signal : " + MesureWifi.getSignal(WIFI_ETUDIANT));
-		//		String nomSignal = MesureWifi.getCurrentSsid();
+		// String nomSignal = MesureWifi.getCurrentSsid();
 		String nomSignal = WIFI_ETUDIANT;
 		this.labelSSIDGet = new JLabel(nomSignal);
-		this.labelSSIDGet.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.labelSSIDGet.setBounds(389, 105, 152, 29);
+		labelSSIDGet.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labelSSIDGet.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		this.labelSSIDGet.setBounds(391, 135, 152, 30);
 		this.getContentPane().add(this.labelSSIDGet);
 
-		//		int qualiteSignal = MesureWifi.getSignal("Livebox-jeroboam");
-		//		int qualiteSignal = MesureWifi.getSignal(MesureWifi.getCurrentSsid());
+		// int qualiteSignal = MesureWifi.getSignal("Livebox-jeroboam");
+		// int qualiteSignal =
+		// MesureWifi.getSignal(MesureWifi.getCurrentSsid());
 		int qualiteSignal = MesureWifi.getSignal(WIFI_ETUDIANT);
 		this.labelQualiteSignalGet = new JLabel("" + qualiteSignal);
-		this.labelQualiteSignalGet.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.labelQualiteSignalGet.setBounds(389, 139, 114, 29);
+		this.labelQualiteSignalGet.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labelQualiteSignalGet.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		this.labelQualiteSignalGet.setBounds(391, 176, 114, 30);
 		this.getContentPane().add(this.labelQualiteSignalGet);
 
 		int debitEntrant = 0;
@@ -116,8 +126,9 @@ public class FenetreWifiDetector extends JFrame {
 			e.printStackTrace();
 		}
 		this.labelDebitEntrantGet = new JLabel("" + debitEntrant);
-		this.labelDebitEntrantGet.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.labelDebitEntrantGet.setBounds(389, 168, 114, 29);
+		this.labelDebitEntrantGet.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labelDebitEntrantGet.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		this.labelDebitEntrantGet.setBounds(391, 217, 114, 30);
 		this.getContentPane().add(this.labelDebitEntrantGet);
 
 		int moyenneDebitDescendantGet = 0;
@@ -127,9 +138,11 @@ public class FenetreWifiDetector extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		this.labelMoyenneDebitDescendantGet = new JLabel("" + moyenneDebitDescendantGet);
-		this.labelMoyenneDebitDescendantGet.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.labelMoyenneDebitDescendantGet.setBounds(389, 198, 114, 29);
+		this.labelMoyenneDebitDescendantGet.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labelMoyenneDebitDescendantGet.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		this.labelMoyenneDebitDescendantGet.setBounds(391, 258, 114, 30);
 		this.getContentPane().add(this.labelMoyenneDebitDescendantGet);
 
 		// on centre la fenetre
@@ -137,7 +150,7 @@ public class FenetreWifiDetector extends JFrame {
 		int largeurEcran = (int) tool.getScreenSize().getWidth();
 		int hauteurEcran = (int) tool.getScreenSize().getHeight();
 		this.pack();
-		this.setLocation((largeurEcran - this.getWidth())/2, (hauteurEcran - this.getHeight())/2);
+		this.setLocation((largeurEcran - this.getWidth()) / 2, (hauteurEcran - this.getHeight()) / 2);
 	}
 
 	public static FenetreWifiDetector getInstance() {
