@@ -38,12 +38,13 @@ public class FenetreCartographieWifi extends JFrame {
 
 	private VueSalle panelSalle;
 	private JLabel labelLargeurSalle;
-	private JTextField textFieldLargeur;
-	private JTextField textFieldHauteur;
+	static JTextField textFieldLargeur;
+	static JTextField textFieldHauteur;
 	private JLabel lblLargeur;
 	private JLabel labelHauteur;
+	private JButton buttonValiderDimensions;
 
-	private FenetreCartographieWifi() {
+	public FenetreCartographieWifi() {
 		// Création de la fenetre
 		this.setResizable(true);
 		this.getContentPane().setBackground(COLOR_PAR_DEFAUT);
@@ -96,6 +97,13 @@ public class FenetreCartographieWifi extends JFrame {
 		this.btnFermer.setText("Retour");
 		this.btnFermer.setActionCommand(ActionMenu.NOM_ACTION_RETOUR_MENU);
 		this.getContentPane().add(this.btnFermer);
+
+		this.buttonValiderDimensions = new JButton(new ActionMenu());
+		this.buttonValiderDimensions.setText("Valider");
+		this.buttonValiderDimensions.setFont(new Font("Helvetica", Font.PLAIN, 17));
+		this.buttonValiderDimensions.setActionCommand(ActionMenu.NOM_ACTION_VALIDER_DIMENSION);
+		this.buttonValiderDimensions.setBounds(545, 120, 189, 51);
+		this.getContentPane().add(buttonValiderDimensions);
 
 		// Boutton exporter résultat
 		// Pas de commande attribuée pour le moment
@@ -165,7 +173,6 @@ public class FenetreCartographieWifi extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Largeur " + FenetreCartographieWifi.this.textFieldLargeur.getText());
 			System.out.println("Hauteur " + FenetreCartographieWifi.this.textFieldHauteur.getText());
-
 			try {
 				this.vueSalle.getSalle()
 						.setHauteur(new Integer(FenetreCartographieWifi.this.textFieldHauteur.getText()));
@@ -183,6 +190,7 @@ public class FenetreCartographieWifi extends JFrame {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
+
 		}
 	}
 }
