@@ -29,7 +29,6 @@ public class Salle extends SurfaceRectangulaire {
 	public void calculListePointMesure() throws Exception {
 		int nbPointMesureLargeur = (int) Math.ceil(this.getLargeur() / DIAMETRE_MESURE);
 		int nbPointMesureHauteur = (int) Math.ceil(this.getHauteur() / DIAMETRE_MESURE);
-		int nbPointMesure = nbPointMesureLargeur*nbPointMesureHauteur;
 
 		int largeurMesure = this.getLargeur() / nbPointMesureLargeur;
 		int hauteurMesure = this.getHauteur() / nbPointMesureHauteur;

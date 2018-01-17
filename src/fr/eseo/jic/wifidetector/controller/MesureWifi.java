@@ -18,10 +18,10 @@ public class MesureWifi {
 	{
 		try 
 		{
-		//System.out.println("Signal : " + MesureWifi.getSignal("Livebox-9962"));	
-		System.out.println(MesureWifi.getAverageSpeed(1));
-		System.out.println(MesureWifi.getSpeedDownFixedTime());
-		//System.out.println(MesureWifi.getCurrentSsid());
+			//System.out.println("Signal : " + MesureWifi.getSignal("Livebox-9962"));	
+			System.out.println(MesureWifi.getAverageSpeed(1));
+			System.out.println(MesureWifi.getSpeedDownFixedTime());
+			//System.out.println(MesureWifi.getCurrentSsid());
 		}
 		catch (Exception e)
 		{

@@ -4,10 +4,11 @@ public class SurfaceRectangulaire extends Surface{
 
 	private int largeur;
 	private int hauteur;
-	public static final String MSG_LARGEUR_NEGATIVE = "La largeur doit être positive";
-	public static final String MSG_HAUTEUR_NEGATIVE = "La hauteur doit être positive";
+	
+	public static final String MSG_LARGEUR_NEGATIVE = "La largeur doit etre positive";
+	public static final String MSG_HAUTEUR_NEGATIVE = "La hauteur doit etre positive";
 
-	public SurfaceRectangulaire(int x	, int y, int largeur, int hauteur) throws Exception{
+	public SurfaceRectangulaire(int x , int y, int largeur, int hauteur) throws Exception {
 		super(x, y);
 		if(largeur < 0){
 			throw new Exception(MSG_LARGEUR_NEGATIVE);
