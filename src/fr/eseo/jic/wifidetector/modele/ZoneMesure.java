@@ -14,6 +14,10 @@ public class ZoneMesure extends SurfaceRectangulaire {
 		this.pointMesure = new PointMesure(xCenter, yCenter);
 	}
 
+	@Override
+	public String toString(){
+		return "Zone Mesure =>"+" x:"+this.getX()+" y:"+this.getY()+" hauteur:"+this.getHauteur()+" largeur:"+this.getLargeur();
+	}
 
 	/*GETTER SETTER*/
 	public PointMesure getPointMesure() {return this.pointMesure;}
