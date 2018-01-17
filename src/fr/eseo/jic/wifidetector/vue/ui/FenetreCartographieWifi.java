@@ -39,7 +39,7 @@ public class FenetreCartographieWifi extends JFrame {
 
 	private FenetreCartographieWifi() {
 
-		this.setResizable(false);
+		this.setResizable(true);
 		this.getContentPane().setBackground(COLOR_PAR_DEFAUT);
 		this.setBounds(300, 300, 710, 580);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,94 +47,94 @@ public class FenetreCartographieWifi extends JFrame {
 		this.setTitle("WifiDetector - Cartographie wifi");
 
 		// Label texte titre
-		labelInfoReseau = new JLabel("Cartographie du réseau wifi:");
-		labelInfoReseau.setForeground(Color.BLUE);
-		labelInfoReseau.setFont(new Font("Helvetica", Font.PLAIN, 38));
-		labelInfoReseau.setBounds(35, 0, 608, 46);
-		this.getContentPane().add(labelInfoReseau);
+		this.labelInfoReseau = new JLabel("Cartographie du réseau wifi:");
+		this.labelInfoReseau.setForeground(Color.BLUE);
+		this.labelInfoReseau.setFont(new Font("Helvetica", Font.PLAIN, 38));
+		this.labelInfoReseau.setBounds(35, 0, 608, 46);
+		this.getContentPane().add(this.labelInfoReseau);
 
 		// Label texte Debit entrant
 		JLabel labelInformation = new JLabel(
 				"Entrez la dimension de la salle afin de savoir où effectuer les relevés.");
 		labelInformation.setFont(new Font("Helvetica", Font.PLAIN, 19));
 		labelInformation.setBounds(6, 58, 648, 29);
-		getContentPane().add(labelInformation);
+		this.getContentPane().add(labelInformation);
 
 		// Label texte Moyenne débit descendant
-		labelDimensionSalle = new JLabel("Dimension de la salle:");
-		labelDimensionSalle.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		labelDimensionSalle.setBounds(6, 98, 189, 29);
-		getContentPane().add(labelDimensionSalle);
+		this.labelDimensionSalle = new JLabel("Dimension de la salle:");
+		this.labelDimensionSalle.setFont(new Font("Helvetica", Font.PLAIN, 19));
+		this.labelDimensionSalle.setBounds(6, 98, 189, 29);
+		this.getContentPane().add(this.labelDimensionSalle);
 
 		// Label version en bas
-		lblVersion = new JLabel("Version 1.0 2018. Tous droits réservés.");
-		lblVersion.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		lblVersion.setBounds(256, 530, 229, 22);
-		this.getContentPane().add(lblVersion);
+		this.lblVersion = new JLabel("Version 1.0 2018. Tous droits réservés.");
+		this.lblVersion.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		this.lblVersion.setBounds(256, 530, 229, 22);
+		this.getContentPane().add(this.lblVersion);
 
-		lblLongueur = new JLabel("Longueur (en m):");
-		lblLongueur.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		lblLongueur.setBounds(214, 98, 148, 29);
-		getContentPane().add(lblLongueur);
+		this.lblLongueur = new JLabel("Longueur (en m):");
+		this.lblLongueur.setFont(new Font("Helvetica", Font.PLAIN, 17));
+		this.lblLongueur.setBounds(214, 98, 148, 29);
+		this.getContentPane().add(this.lblLongueur);
 
-		labelLargeur = new JLabel("Largeur (en m):");
-		labelLargeur.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		labelLargeur.setBounds(456, 99, 120, 29);
-		getContentPane().add(labelLargeur);
+		this.labelLargeur = new JLabel("Largeur (en m):");
+		this.labelLargeur.setFont(new Font("Helvetica", Font.PLAIN, 17));
+		this.labelLargeur.setBounds(456, 99, 120, 29);
+		this.getContentPane().add(this.labelLargeur);
 
 		// Boutton fermer fenetre
-		btnFermer = new JButton(new ActionMenu());
-		btnFermer.setHorizontalAlignment(SwingConstants.LEFT);
-		btnFermer.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		btnFermer.setBounds(638, 508, 66, 44);
-		btnFermer.setText("Retour");
-		btnFermer.setActionCommand(ActionMenu.NOM_ACTION_RETOUR_MENU);
-		this.getContentPane().add(btnFermer);
+		this.btnFermer = new JButton(new ActionMenu());
+		this.btnFermer.setHorizontalAlignment(SwingConstants.LEFT);
+		this.btnFermer.setFont(new Font("Helvetica", Font.PLAIN, 17));
+		this.btnFermer.setBounds(638, 508, 66, 44);
+		this.btnFermer.setText("Retour");
+		this.btnFermer.setActionCommand(ActionMenu.NOM_ACTION_RETOUR_MENU);
+		this.getContentPane().add(this.btnFermer);
 
 		// Boutton exporter résultat
 		// Pas de commande attribuée pour le moment
-		buttonExporterResultat = new JButton((Action) null);
-		buttonExporterResultat.setText("Exporter résultat");
-		buttonExporterResultat.setHorizontalAlignment(SwingConstants.LEFT);
-		buttonExporterResultat.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		buttonExporterResultat.setActionCommand("Fermer fenetre");
-		buttonExporterResultat.setBounds(6, 508, 169, 44);
-		getContentPane().add(buttonExporterResultat);
+		this.buttonExporterResultat = new JButton((Action) null);
+		this.buttonExporterResultat.setText("Exporter résultat");
+		this.buttonExporterResultat.setHorizontalAlignment(SwingConstants.LEFT);
+		this.buttonExporterResultat.setFont(new Font("Helvetica", Font.PLAIN, 17));
+		this.buttonExporterResultat.setActionCommand("Fermer fenetre");
+		this.buttonExporterResultat.setBounds(6, 508, 169, 44);
+		this.getContentPane().add(this.buttonExporterResultat);
 
 		// label texte
-		labelLongueurSalle = new JLabel("Longueur");
-		labelLongueurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
-		labelLongueurSalle.setBounds(269, 479, 93, 21);
-		getContentPane().add(labelLongueurSalle);
+		this.labelLongueurSalle = new JLabel("Longueur");
+		this.labelLongueurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
+		this.labelLongueurSalle.setBounds(269, 479, 93, 21);
+		this.getContentPane().add(this.labelLongueurSalle);
 
-		lblLargeurSalle = new JLabel("Largeur");
-		lblLargeurSalle.setBounds(6, 294, 74, 21);
-		getContentPane().add(lblLargeurSalle);
-		lblLargeurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
+		this.lblLargeurSalle = new JLabel("Largeur");
+		this.lblLargeurSalle.setBounds(6, 294, 74, 21);
+		this.getContentPane().add(this.lblLargeurSalle);
+		this.lblLargeurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
 		// Champ pour remplir inofrmations sur la salle
-		textFieldLongueur = new JTextField();
-		textFieldLongueur.setBounds(353, 99, 74, 26);
-		getContentPane().add(textFieldLongueur);
-		textFieldLongueur.setColumns(10);
+		this.textFieldLongueur = new JTextField();
+		this.textFieldLongueur.setBounds(353, 99, 74, 26);
+		this.getContentPane().add(this.textFieldLongueur);
+		this.textFieldLongueur.setColumns(10);
 
-		textFieldLargeur = new JTextField();
-		textFieldLargeur.setColumns(10);
-		textFieldLargeur.setBounds(577, 99, 66, 26);
-		getContentPane().add(textFieldLargeur);
+		this.textFieldLargeur = new JTextField();
+		this.textFieldLargeur.setColumns(10);
+		this.textFieldLargeur.setBounds(577, 99, 66, 26);
+		this.getContentPane().add(this.textFieldLargeur);
 
 		// Ajout du rectangle dans le panel crée specialement pour ca
-		panelSalle = new VueSalle();
-		panelSalle.setBounds(52, 141, 591, 336);
-		getContentPane().add(panelSalle);
+		this.panelSalle = new VueSalle();
+		this.panelSalle.setBounds(52, 141, 591, 336);
+		this.getContentPane().add(this.panelSalle);
 		/**
 		 * JPanel panel = new VueSalle(); System.out.println("Je réalise ");
-		 * 
+		 *
 		 * this.setContentPane(panel); System.out.println("Je réalise2 ");
 		 */
 
-		textFieldLongueur.addActionListener(new actionListener());
-		textFieldLargeur.addActionListener(new actionListener());
+		this.textFieldLongueur.addActionListener(new actionListener());
+		this.textFieldLargeur.addActionListener(new actionListener());
 
 	}
 
@@ -146,9 +146,10 @@ public class FenetreCartographieWifi extends JFrame {
 	}
 
 	class actionListener implements ActionListener {
+		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Field1 " + textFieldLongueur.getText());
-			System.out.println("Field2 " + textFieldLargeur.getText());
+			System.out.println("Field1 " + FenetreCartographieWifi.this.textFieldLongueur.getText());
+			System.out.println("Field2 " + FenetreCartographieWifi.this.textFieldLargeur.getText());
 		}
 	}
 }

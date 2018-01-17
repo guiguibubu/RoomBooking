@@ -11,9 +11,9 @@ public class Salle extends SurfaceRectangulaire {
 	private List<ZoneMesure> listeZoneMesure;
 
 	/**
-	 * Diamètre pris en compte pour connaitre le nombre de points de mesure à faire (en mètre)
+	 * Diamï¿½tre pris en compte pour connaitre le nombre de points de mesure ï¿½ faire (en mï¿½tre)
 	 */
-	public static final int DIAMETRE_MESURE = 10;
+	public static final int DIAMETRE_MESURE = 5;
 
 	/*CONSTRUCTEURS*/
 	public Salle(int largeur, int hauteur) throws Exception{
