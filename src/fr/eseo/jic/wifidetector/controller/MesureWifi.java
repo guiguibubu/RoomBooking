@@ -15,16 +15,10 @@ public class MesureWifi {
 	{
 		try
 		{
-<<<<<<< HEAD
 			//System.out.println("Signal : " + MesureWifi.getSignal("Livebox-9962"));
 			System.out.println(MesureWifi.getAverageSpeed(1));
 			System.out.println(MesureWifi.getSpeedDownFixedTime());
 			//System.out.println(MesureWifi.getCurrentSsid());
-=======
-			//System.out.println("Signal : " + MesureWifi.getSignal("Livebox-9962"));	
-			//System.out.println(MesureWifi.getSpeedDownFixedTime());
-			System.out.println(MesureWifi.getCurrentSsid());
->>>>>>> branch 'WifiDetector' of https://github.com/LilianBr/RoomBooking.git
 		}
 		catch (Exception e)
 		{
@@ -137,87 +131,21 @@ public class MesureWifi {
 		int sum = 0;
 		for(int n = 0; n < samplesNumber; n++)
 		{
-			sum += getSpeedDownFixedTime();
+			sum += getSpeedDown();
 		}
 		return sum/samplesNumber;
 	}
-<<<<<<< HEAD
 
-=======
-	
-	public static int getSignal(String wifiName)
-	{
-		int signal = 0;
-		if(OsValidator.isWindows())
-		{
-			signal = getSignalWin(wifiName);
-		}
-		else if (OsValidator.isUnix())
-		{
-			signal = getSignalLinux(wifiName);
-		}
-		return signal;
-	}
-	
-	public static int getSignalLinux(String wifiName)
-	{
-		String signal = "0";	
-        try 
-        {        	
-			String commandWlan = "netsh wlan show network mode=bssid";
-        	Process cmd;
-        	cmd = Runtime.getRuntime().exec("cmd /c " + commandWlan);
-    		cmd.waitFor();
-            
-    		BufferedReader reader = new BufferedReader(new InputStreamReader(cmd.getInputStream()));
-            String line = reader.readLine();  
-            
-            boolean rightSsid = false, signalFound = false; 
-            
-            while(line != null && signalFound == false)
-    		{		
-            	line = reader.readLine();
-    			if(rightSsid == true)
-    			{
-    				if(line.contains(SIGNAL_FR))
-    				{
-    					signal = line.substring(line.indexOf(": ") + 2, line.indexOf("%"));
-    					rightSsid = false;
-    					signalFound = true;
-    				}	
-    			} 
-    			else 
-    			{
-    				rightSsid = line.contains(wifiName);
-    			}
-    		}             
-        } 
-        catch (Exception e)
-        {
-            return Integer.valueOf(signal);
-        }		
-		return Integer.valueOf(signal);
-	}
-	
->>>>>>> branch 'WifiDetector' of https://github.com/LilianBr/RoomBooking.git
 	/**
 	 *
 	 * @param wifiName Nom du réseau Wifi (Example : Livebox-6589)
 	 * @return Signal wifi du réseau sélectionné en pourcentage (Max : 99 %)
 	 */
-<<<<<<< HEAD
 	public static int getSignal(String wifiName)
 	{
 		String signal = "0";
 		try
 		{
-=======
-	public static int getSignalWin(String wifiName)
-	{	
-		String signal = "0";	
-        try 
-        {        	
->>>>>>> branch 'WifiDetector' of https://github.com/LilianBr/RoomBooking.git
 			String commandWlan = "netsh wlan show network mode=bssid";
 			Process cmd;
 			cmd = Runtime.getRuntime().exec("cmd /c " + commandWlan);
@@ -254,11 +182,7 @@ public class MesureWifi {
 	}
 
 	/**
-<<<<<<< HEAD
 	 *
-=======
-	 * Ne fonctionne pas en filaire
->>>>>>> branch 'WifiDetector' of https://github.com/LilianBr/RoomBooking.git
 	 * @return Renvoie le SSID actuellement utilisé
 	 */
 	public static String getCurrentSsid()
