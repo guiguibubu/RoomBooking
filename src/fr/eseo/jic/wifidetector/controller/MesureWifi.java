@@ -1,13 +1,10 @@
 package fr.eseo.jic.wifidetector.controller;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class MesureWifi {
@@ -72,7 +69,7 @@ public class MesureWifi {
 		int sum = 0;
 		for(int n = 0; n < samplesNumber; n++)
 		{
-			sum += getSpeedDown();
+			sum += getSpeedDownFixedTime();
 		}
 		return sum/samplesNumber;
 	}
@@ -148,7 +145,7 @@ public class MesureWifi {
 	 * @param wifiName Nom du réseau Wifi (Example : Livebox-6589)
 	 * @return Signal wifi du réseau sélectionné en pourcentage (Max : 99 %)
 	 */
-	public static int getSignal(String wifiName)
+	public static int getSignalWin(String wifiName)
 	{	
 		String signal = "0";	
         try 
