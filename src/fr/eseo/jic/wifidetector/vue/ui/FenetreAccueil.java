@@ -1,4 +1,5 @@
 package fr.eseo.jic.wifidetector.vue.ui;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
-public class FenetreAccueil extends JFrame{
+public class FenetreAccueil extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static FenetreAccueil instance;
@@ -27,7 +28,7 @@ public class FenetreAccueil extends JFrame{
 
 	JLabel labelMenu;
 
-	private FenetreAccueil(){
+	private FenetreAccueil() {
 
 		this.setVisible(true);
 		this.setMinimumSize(new Dimension(550, 300));
@@ -35,10 +36,9 @@ public class FenetreAccueil extends JFrame{
 		this.setTitle(TITRE_PAR_DEFAUT);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
-		//		timer.schedule(versEcranCalibration(), (long)10000);
+		// timer.schedule(versEcranCalibration(), (long)10000);
 
-
-		//Barre de chargement
+		// Barre de chargement
 		this.t = new Thread(new Traitement());
 		this.progressBar = new JProgressBar();
 		this.progressBar.setForeground(new Color(0, 0, 0));
@@ -51,7 +51,7 @@ public class FenetreAccueil extends JFrame{
 		this.progressBar.setOpaque(false);
 
 		this.t.start();
-		//Logo + texte WifiDetection
+		// Logo + texte WifiDetection
 
 		this.labelMenu = new JLabel("WifiDetector");
 		this.labelMenu.setForeground(Color.BLACK);
@@ -60,7 +60,7 @@ public class FenetreAccueil extends JFrame{
 		this.labelMenu.setBounds(6, 6, 500, 202);
 		this.getContentPane().add(this.labelMenu);
 
-		//Boutton startButton pour aller sur la fenetre suivante
+		// Boutton startButton pour aller sur la fenetre suivante
 		this.startButton = new JButton(new ActionMenu());
 		this.startButton.setOpaque(false);
 		this.startButton.setVisible(false);
@@ -71,41 +71,33 @@ public class FenetreAccueil extends JFrame{
 		this.startButton.setHorizontalAlignment(SwingConstants.LEFT);
 		this.startButton.setBounds(300, 150, 87, 50);
 
-
 		this.getContentPane().add(this.progressBar);
 		this.getContentPane().add(this.startButton);
 		this.getContentPane().add(this.labelMenu);
 	}
 
-
-
-
-	public static FenetreAccueil getInstance(){
-		if (instance == null){
+	public static FenetreAccueil getInstance() {
+		if (instance == null) {
 			FenetreAccueil.instance = new FenetreAccueil();
 		}
 		return FenetreAccueil.instance;
 	}
 
-
-
-	public PanneauAccueil getPanneauAccueil(){
+	public PanneauAccueil getPanneauAccueil() {
 		return this.paneAccueil;
 	}
 
-
-
-
-	class Traitement implements Runnable{
+	class Traitement implements Runnable {
 		@Override
-		public void run(){
-			for(int val = 0; val <= 100; val++){
+		public void run() {
+			for (int val = 0; val <= 100; val++) {
 				FenetreAccueil.this.progressBar.setValue(val);
-				if(val == 100){
+				FenetreWifiDetector.getInstance().setEnabled(true);
+				if (val == 100) {
 					FenetreAccueil.this.startButton.setVisible(true);
 				}
 				try {
-					Thread.sleep(100);
+					Thread.sleep(15); // rapidité de remplissage de la barre
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -113,8 +105,5 @@ public class FenetreAccueil extends JFrame{
 			}
 		}
 	}
-
-
-
 
 }

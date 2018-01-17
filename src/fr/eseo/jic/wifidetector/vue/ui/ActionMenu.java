@@ -13,7 +13,7 @@ public class ActionMenu extends AbstractAction {
 
 	public static final String NOM_ACTION_RETOUR = "Retour au menu";
 	public static final String NOM_ACTION_RETOUR_MENU = "Retour menu";
-
+	public static final String NOM_ACTION_RETOUR_ACCUEIL = "Retour fenetre accueil";
 	public static final String NOM_ACTION_FERMER = "Fermer fenetre";
 	public static final String NOM_ACTION_CLOSE = "Fermer WifiDetector";
 
@@ -71,8 +71,13 @@ public class ActionMenu extends AbstractAction {
 			// FenetreWifiDetection.instance = null;
 			// FenetreWifiDetection.getInstance().setVisible(false);
 			FenetreMenu.getInstance().setVisible(true);
-
 		}
+		if (event.getActionCommand() == NOM_ACTION_RETOUR_ACCUEIL) {
+			FenetreWarningConnexion.getInstance().setVisible(false);
+			FenetreAccueil.getInstance().setVisible(true);
+		}
+		
+		
 
 	}
 
