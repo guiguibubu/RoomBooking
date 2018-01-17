@@ -72,16 +72,15 @@ public class MesureWifi {
 		int sum = 0;
 		for(int n = 0; n < samplesNumber; n++)
 		{
-			sum += getSpeedDownFixedTime();
+			sum += getSpeedDown();
 		}
 		return sum/samplesNumber;
 	}
 	
 	/**
-	 * Voir les fonctions getSignal*() pour plus d'informations pour chaque OS
-	 * Fonctionne sur Linux et Windows
-	 * @param wifiName Nom du Wifi
-	 * @return Force du signal en pourcentage 
+	 *
+	 * @param wifiName Nom du réseau Wifi (Example : Livebox-6589)
+	 * @return Signal wifi du réseau sélectionné en pourcentage (Max : 99 %)
 	 */
 	public static int getSignal(String wifiName)
 	{
@@ -149,7 +148,7 @@ public class MesureWifi {
 	 * @param wifiName Nom du réseau Wifi (Example : Livebox-6589)
 	 * @return Signal wifi du réseau sélectionné en pourcentage (Max : 99 %)
 	 */
-	public static int getSignalWin(String wifiName)
+	public static int getSignal(String wifiName)
 	{	
 		String signal = "0";	
         try 
@@ -164,7 +163,7 @@ public class MesureWifi {
             
             boolean rightSsid = false, signalFound = false; 
             
-            while(line != null || signalFound == false)
+			while(line != null && signalFound == false )
     		{		
             	line = reader.readLine();
     			if(rightSsid == true)
@@ -190,7 +189,7 @@ public class MesureWifi {
 	}
 
 	/**
-	 * Ne fonctionne pas en filaire
+	 *
 	 * @return Renvoie le SSID actuellement utilisé
 	 */
 	public static String getCurrentSsid()

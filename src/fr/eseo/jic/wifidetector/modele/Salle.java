@@ -10,16 +10,18 @@ public class Salle extends SurfaceRectangulaire {
 	private String nom;
 	private List<ZoneMesure> listeZoneMesure;
 
+	public static final String MSG_NON_ZERO = "La largeur et la hauteur doivent être positives";
+
 	/**
-	 * Diam�tre pris en compte pour connaitre le nombre de points de mesure � faire (en m�tre)
+	 * Diamètre pris en compte pour connaitre le nombre de points de mesure à faire (en mètre)
 	 */
-	public static final double DIAMETRE_MESURE = 10;
+	public static final double DIAMETRE_MESURE = 5;
 
 	/*CONSTRUCTEURS*/
 	public Salle(int largeur, int hauteur) throws Exception{
 		super(largeur, hauteur);
 		this.listeZoneMesure = new ArrayList<ZoneMesure>();
-		calculListePointMesure();
+		//		this.calculListePointMesure();
 	}
 
 	public Salle() throws Exception {
@@ -30,6 +32,9 @@ public class Salle extends SurfaceRectangulaire {
 		int nbPointMesureLargeur = (int) Math.ceil(this.getLargeur() / DIAMETRE_MESURE);
 		int nbPointMesureHauteur = (int) Math.ceil(this.getHauteur() / DIAMETRE_MESURE);
 
+		if(nbPointMesureHauteur == 0 || nbPointMesureLargeur == 0){
+			throw new Exception(MSG_NON_ZERO);
+		}
 		int largeurMesure = this.getLargeur() / nbPointMesureLargeur;
 		int hauteurMesure = this.getHauteur() / nbPointMesureHauteur;
 
