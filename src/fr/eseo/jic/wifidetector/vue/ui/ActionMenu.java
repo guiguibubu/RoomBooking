@@ -72,6 +72,7 @@ public class ActionMenu extends AbstractAction {
 			// FenetreWifiDetection.getInstance().setVisible(false);
 			FenetreMenu.getInstance().setVisible(true);
 		}
+		
 		if (event.getActionCommand() == NOM_ACTION_RETOUR_ACCUEIL) {
 			FenetreWarningConnexion.getInstance().setVisible(false);
 			FenetreAccueil.getInstance().setVisible(true);

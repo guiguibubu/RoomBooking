@@ -91,6 +91,7 @@ public class FenetreAccueil extends JFrame {
 		@Override
 		public void run() {
 			for (int val = 0; val <= 100; val++) {
+				
 				FenetreAccueil.this.progressBar.setValue(val);
 				FenetreWifiDetector.getInstance().setEnabled(true);
 				if (val == 100) {

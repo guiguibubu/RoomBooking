@@ -28,6 +28,7 @@ public class FenetreWarningConnexion extends JFrame {
 	private JLabel labelSSIDGet;
 	private JLabel labelDebitEntrantGet;
 
+	
 	private FenetreWarningConnexion() {
 
 		// Création de la fenetre 

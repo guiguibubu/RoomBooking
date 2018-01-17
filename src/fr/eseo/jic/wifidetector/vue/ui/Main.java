@@ -35,6 +35,7 @@ public class Main {
 			System.out.println(MesureWifi.getCurrentSsid());
 			FenetreWarningConnexion.getInstance().setVisible(false);
 			FenetreAccueil.getInstance().setVisible(true);
+			
 		}
 	}
 
