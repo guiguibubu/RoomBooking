@@ -1,7 +1,9 @@
 package fr.eseo.jic.wifidetector.vue.ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +20,10 @@ public class FenetreMenu extends JFrame {
 
 	public static final String TITRE_PAR_DEFAUT = "WifiDetector";
 	public static final Color COLOR_PAR_DEFAUT = Color.WHITE;
+
+	private static final int LARGEUR_FENETRE_MIN = 650;
+	private static final int HAUTEUR_FENETRE_MIN = 300;
+
 	private static FenetreMenu instance;
 
 	private JLabel labelImageFondMenu;
@@ -33,7 +39,8 @@ public class FenetreMenu extends JFrame {
 	private FenetreMenu() {
 		this.setResizable(true);
 		this.getContentPane().setBackground(COLOR_PAR_DEFAUT);
-		this.setBounds(300, 300, 650, 300);
+		//		this.setBounds(300, 300, 650, 300);
+		this.setMinimumSize(new Dimension(LARGEUR_FENETRE_MIN, HAUTEUR_FENETRE_MIN));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 		this.setTitle(TITRE_PAR_DEFAUT);
@@ -100,6 +107,13 @@ public class FenetreMenu extends JFrame {
 		this.labelTitreFenetreMenu.setBounds(191, 6, 448, 72);
 		this.labelTitreFenetreMenu.setBackground(Color.WHITE);
 		this.getContentPane().add(this.labelTitreFenetreMenu);
+
+		// on centre la fenetre
+		Toolkit tool = this.getToolkit();
+		int largeurEcran = (int) tool.getScreenSize().getWidth();
+		int hauteurEcran = (int) tool.getScreenSize().getHeight();
+		this.pack();
+		this.setLocation((largeurEcran - this.getWidth())/2, (hauteurEcran - this.getHeight())/2);
 
 	}
 

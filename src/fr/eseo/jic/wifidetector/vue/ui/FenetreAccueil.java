@@ -3,6 +3,7 @@ package fr.eseo.jic.wifidetector.vue.ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.Timer;
 
 import javax.swing.ImageIcon;
@@ -19,6 +20,9 @@ public class FenetreAccueil extends JFrame {
 
 	public static final String TITRE_PAR_DEFAUT = "WifiDetector";
 
+	private static final int LARGEUR_FENETRE_MIN = 550;
+	private static final int HAUTEUR_FENETRE_MIN = 300;
+
 	public PanneauAccueil paneAccueil = new PanneauAccueil();
 
 	private Thread t;
@@ -31,7 +35,7 @@ public class FenetreAccueil extends JFrame {
 	private FenetreAccueil() {
 
 		this.setVisible(true);
-		this.setMinimumSize(new Dimension(550, 300));
+		this.setMinimumSize(new Dimension(LARGEUR_FENETRE_MIN, HAUTEUR_FENETRE_MIN));
 		this.setLocationRelativeTo(null);
 		this.setTitle(TITRE_PAR_DEFAUT);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -74,6 +78,13 @@ public class FenetreAccueil extends JFrame {
 		this.getContentPane().add(this.progressBar);
 		this.getContentPane().add(this.startButton);
 		this.getContentPane().add(this.labelMenu);
+
+		// on centre la fenetre
+		Toolkit tool = this.getToolkit();
+		int largeurEcran = (int) tool.getScreenSize().getWidth();
+		int hauteurEcran = (int) tool.getScreenSize().getHeight();
+		this.pack();
+		this.setLocation((largeurEcran - this.getWidth())/2, (hauteurEcran - this.getHeight())/2);
 	}
 
 	public static FenetreAccueil getInstance() {

@@ -1,7 +1,9 @@
 package fr.eseo.jic.wifidetector.vue.ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +27,9 @@ public class FenetreWifiDetector extends JFrame {
 	public static final String TITRE_PAR_DEFAUT = "WifiDetector";
 	public static final Color COLOR_PAR_DEFAUT = Color.WHITE;
 
+	private static final int LARGEUR_FENETRE_MIN = 710;
+	private static final int HAUTEUR_FENETRE_MIN = 300;
+
 	public static final String WIFI_ETUDIANT = "Wifi_etudiants";
 
 	public static FenetreWifiDetector instance;
@@ -38,7 +43,8 @@ public class FenetreWifiDetector extends JFrame {
 
 		this.setResizable(true);
 		this.getContentPane().setBackground(COLOR_PAR_DEFAUT);
-		this.setBounds(300, 300, 710, 320);
+		//		this.setBounds(300, 300, 710, 320);
+		this.setMinimumSize(new Dimension(LARGEUR_FENETRE_MIN, HAUTEUR_FENETRE_MIN));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 		this.setTitle("WifiDetector - Informations sur le réseau");
@@ -126,6 +132,12 @@ public class FenetreWifiDetector extends JFrame {
 		this.labelMoyenneDebitDescendantGet.setBounds(389, 198, 114, 29);
 		this.getContentPane().add(this.labelMoyenneDebitDescendantGet);
 
+		// on centre la fenetre
+		Toolkit tool = this.getToolkit();
+		int largeurEcran = (int) tool.getScreenSize().getWidth();
+		int hauteurEcran = (int) tool.getScreenSize().getHeight();
+		this.pack();
+		this.setLocation((largeurEcran - this.getWidth())/2, (hauteurEcran - this.getHeight())/2);
 	}
 
 	public static FenetreWifiDetector getInstance() {
