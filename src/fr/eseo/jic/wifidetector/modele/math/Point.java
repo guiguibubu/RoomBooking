@@ -2,8 +2,8 @@ package fr.eseo.jic.wifidetector.modele.math;
 
 public class Point {
 
-	public static final String MSG_ABSCISSE_NEGATIVE = "L'abscisse doit être positive";
-	public static final String MSG_ORDONNEE_NEGATIVE = "L'ordonnée doit être positive";
+	public static final String MSG_ABSCISSE_NEGATIVE = "L'abscisse doit etre positive";
+	public static final String MSG_ORDONNEE_NEGATIVE = "L'ordonnee doit etre positive";
 
 	int x;
 	int y;
