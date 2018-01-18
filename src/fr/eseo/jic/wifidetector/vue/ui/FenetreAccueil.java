@@ -46,9 +46,8 @@ public class FenetreAccueil extends JFrame {
 		this.getContentPane().setLayout(null);
 
 		// Barre de chargement
-		this.t = new Thread(new Traitement());
 		this.progressBar = new JProgressBar();
-		progressBar.setStringPainted(true);
+		this.progressBar.setStringPainted(true);
 		this.progressBar.setForeground(new Color(0, 0, 0));
 		this.progressBar.setMaximum(100);
 		this.progressBar.setMinimum(0);
@@ -56,7 +55,10 @@ public class FenetreAccueil extends JFrame {
 		this.progressBar.setBounds(25, 300, 350, 50);
 		this.progressBar.setBackground(new Color(255, 255, 255));
 
-		this.t.start();
+		//		this.t = new Thread(new Traitement());
+		//		this.t.start();
+		Traitement traitementProgressBar = new Traitement(this.progressBar);
+		traitementProgressBar.start();
 		// Logo + texte WifiDetection
 
 		this.labelMenuImage = new JLabel("");
@@ -64,7 +66,7 @@ public class FenetreAccueil extends JFrame {
 		this.labelMenuImage.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 50));
 		// this.labelMenu.setIcon(new
 		// ImageIcon("/fr/eseo/jic/wifidetector/res/FenetreAccueil/wifi-2.png"));
-		this.labelMenuImage.setIcon(new ImageIcon(getClass().getResource("/wifi-2.png")));
+		this.labelMenuImage.setIcon(new ImageIcon(this.getClass().getResource("/wifi-2.png")));
 		this.labelMenuImage.setBounds(25, 25, 300, 200);
 		this.getContentPane().add(this.labelMenuImage);
 
@@ -78,11 +80,11 @@ public class FenetreAccueil extends JFrame {
 		this.startButton.setText("Start");
 		this.startButton.setBounds(485, 300, 125, 50);
 		// Titre fenetre
-		label = new JLabel("WifiDetector");
-		label.setForeground(Color.BLUE);
-		label.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 50));
-		label.setBounds(325, 25, 300, 200);
-		getContentPane().add(label);
+		this.label = new JLabel("WifiDetector");
+		this.label.setForeground(Color.BLUE);
+		this.label.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 50));
+		this.label.setBounds(325, 25, 300, 200);
+		this.getContentPane().add(this.label);
 
 		this.getContentPane().add((this.progressBar));
 		this.getContentPane().add(this.startButton);
@@ -108,23 +110,89 @@ public class FenetreAccueil extends JFrame {
 	}
 
 	class Traitement implements Runnable {
+
+		boolean running = false;
+		private Thread thread;
+		JProgressBar progressBar;
+
+		public Traitement(JProgressBar progressBar){
+			super();
+			this.progressBar = progressBar;
+		}
+
 		@Override
 		public void run() {
 			for (int val = 0; val <= 100; val++) {
 
-				FenetreAccueil.this.progressBar.setValue(val);
-				FenetreWifiDetector.getInstance().setEnabled(true);
+				this.progressBar.setValue(val);
+				TraitementWifi traitementWifi = new TraitementWifi();
+				traitementWifi.start();
 				if (val == 100) {
 					FenetreAccueil.this.startButton.setVisible(true);
+					this.stop();
 				}
 				try {
-					Thread.sleep(15); // rapidité de remplissage de la barre
+					Thread.sleep(200); // rapidité de remplissage de la barre
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
+
+		public synchronized void start(){
+			if(this.running) {
+				return;
+			}
+			this.running = true;
+			this.thread = new Thread(this);
+			this.thread.start();//va chercher le run() car Runnable
+		}
+
+		public synchronized void stop() {
+			if(!this.running){
+				return;
+			}
+			this.running = false;
+			try {
+				this.thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	class TraitementWifi implements Runnable{
+
+		private boolean running = false;
+		private Thread thread;
+
+		@Override
+		public void run() {
+			FenetreWifiDetector.getInstance().setEnabled(true);
+			this.stop();
+		}
+
+		public synchronized void start(){
+			if(this.running) {
+				return;
+			}
+			this.running = true;
+			this.thread = new Thread(this);
+			this.thread.start();//va chercher le run() car Runnable
+		}
+
+		public synchronized void stop() {
+			if(!this.running){
+				return;
+			}
+			this.running = false;
+			try {
+				this.thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 }

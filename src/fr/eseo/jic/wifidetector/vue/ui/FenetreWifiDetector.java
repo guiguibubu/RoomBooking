@@ -28,9 +28,7 @@ public class FenetreWifiDetector extends JFrame {
 	public static final Color COLOR_PAR_DEFAUT = Color.WHITE;
 
 	private static final int LARGEUR_FENETRE_MIN = 650;
-	private static final int HAUTEUR_FENETRE_MIN = 400;
-
-	public static final String WIFI_ETUDIANT = "Wifi_etudiants";
+	private static final int HAUTEUR_FENETRE_MIN = 410;
 
 	public static FenetreWifiDetector instance;
 	private JLabel labelMoyenneDebitDescendant;
@@ -99,11 +97,11 @@ public class FenetreWifiDetector extends JFrame {
 		// MesureWifi.getSignal("Livebox-jeroboam"));
 		// System.out.println("Signal : " +
 		// MesureWifi.getSignal(MesureWifi.getCurrentSsid()));
-		System.out.println("Signal : " + MesureWifi.getSignal(WIFI_ETUDIANT));
+		//		System.out.println("Signal : " + MesureWifi.getSignal(MesureWifi.WIFI_ETUDIANT));
 		// String nomSignal = MesureWifi.getCurrentSsid();
-		String nomSignal = WIFI_ETUDIANT;
+		String nomSignal = MesureWifi.WIFI_ETUDIANT;
 		this.labelSSIDGet = new JLabel(nomSignal);
-		labelSSIDGet.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labelSSIDGet.setHorizontalAlignment(SwingConstants.CENTER);
 		this.labelSSIDGet.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
 		this.labelSSIDGet.setBounds(391, 135, 152, 30);
 		this.getContentPane().add(this.labelSSIDGet);
@@ -111,7 +109,7 @@ public class FenetreWifiDetector extends JFrame {
 		// int qualiteSignal = MesureWifi.getSignal("Livebox-jeroboam");
 		// int qualiteSignal =
 		// MesureWifi.getSignal(MesureWifi.getCurrentSsid());
-		int qualiteSignal = MesureWifi.getSignal(WIFI_ETUDIANT);
+		int qualiteSignal = MesureWifi.getSignal(MesureWifi.WIFI_ETUDIANT);
 		this.labelQualiteSignalGet = new JLabel("" + qualiteSignal);
 		this.labelQualiteSignalGet.setHorizontalAlignment(SwingConstants.CENTER);
 		this.labelQualiteSignalGet.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));

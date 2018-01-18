@@ -22,7 +22,7 @@ public class FenetreMenu extends JFrame {
 	public static final Color COLOR_PAR_DEFAUT = Color.WHITE;
 
 	private static final int LARGEUR_FENETRE_MIN = 650;
-	private static final int HAUTEUR_FENETRE_MIN = 400;
+	private static final int HAUTEUR_FENETRE_MIN = 410;
 
 	private static FenetreMenu instance;
 
@@ -59,6 +59,7 @@ public class FenetreMenu extends JFrame {
 		this.btnCartographier.setBounds(395, 209, 229, 72);
 		this.btnCartographier.setActionCommand(ActionMenu.NOM_ACTION_CARTOGRAPHIER);
 		this.btnCartographier.setText("Cartographier la salle");
+		this.btnCartographier.setForeground(Color.WHITE);
 		this.btnCartographier.setBackground(Color.BLACK);
 		this.getContentPane().add(this.btnCartographier);
 
@@ -74,7 +75,7 @@ public class FenetreMenu extends JFrame {
 		this.labelImageFondMenu = new JLabel("");
 		// this.labelImageFondMenu.setIcon(new
 		// ImageIcon("/Users/dimitrijarneau/workspace/WifiDetection/img/FenetreAccueil/wifi-4.png"));
-		this.labelImageFondMenu.setIcon(new ImageIcon(getClass().getResource("/wifi-5.png")));
+		this.labelImageFondMenu.setIcon(new ImageIcon(this.getClass().getResource("/wifi-5.png")));
 		this.labelImageFondMenu.setBounds(25, 25, 135, 93);
 		this.getContentPane().add(this.labelImageFondMenu);
 
@@ -87,7 +88,7 @@ public class FenetreMenu extends JFrame {
 		// Texte description
 		this.labelTextBehindTittle = new JLabel(
 				"<html>Cette application permet d'obtenir des informations sur le réseau auquel vous etes connecté ou alors de cartographier la qualité du réseau wifi dans une salle.</html>");
-		labelTextBehindTittle.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labelTextBehindTittle.setHorizontalAlignment(SwingConstants.CENTER);
 		this.labelTextBehindTittle.setForeground(Color.BLACK);
 		this.labelTextBehindTittle.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 17));
 		this.labelTextBehindTittle.setBackground(Color.WHITE);

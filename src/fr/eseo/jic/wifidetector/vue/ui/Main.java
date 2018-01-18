@@ -6,22 +6,22 @@ import java.net.URL;
 
 import javax.swing.SwingUtilities;
 
-import fr.eseo.jic.wifidetector.controller.MesureWifi;
-
 public class Main {
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
+			@Override
 			public void run() {
-			
+
 				try {
 					Warning();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Warning");
+					// on affiche le pop up
+					FenetreWarningConnexion.getInstance().setVisible(true);
 				}
-			 
+
 				// FenetreAccueil.getInstance().setVisible(true);
 				// FenetreMenu.getInstance().setVisible(true);
 				// FenetrePartition.getInstance().setVisible(true);
@@ -35,7 +35,7 @@ public class Main {
 
 	// Pop warning si SSID == None donc pas de réseau wifi
 	public static void Warning() throws IOException {
-		System.out.println(MesureWifi.getCurrentSsid());
+		//		System.out.println(MesureWifi.getCurrentSsid());
 		// Mettre en commentaire pour passer la condition if pour passer le
 		// warning (pour Mac, car getSSID ne fonctionne pas pour Mac)
 		/*
@@ -51,15 +51,15 @@ public class Main {
 		mCon.setChunkedStreamingMode(0);
 		mCon.setDoOutput(true);
 		System.out.println(mCon.getResponseCode());
-		
+
 		if (mCon.getResponseCode() != 200) {
 			System.out.println("Warning");
 			// on affiche le pop up
 			FenetreWarningConnexion.getInstance().setVisible(true);
 		} else {
-			System.out.println(MesureWifi.getCurrentSsid());
+			//			System.out.println(MesureWifi.getCurrentSsid());
 			// on enlève la fenetre pop up
-			FenetreWarningConnexion.getInstance().setVisible(false);
+			//			FenetreWarningConnexion.getInstance().setVisible(false);
 			// on affiche la fenetre d'accueil
 			FenetreAccueil.getInstance().setVisible(true);
 		}

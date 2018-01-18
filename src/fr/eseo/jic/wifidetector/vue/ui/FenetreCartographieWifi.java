@@ -103,7 +103,7 @@ public class FenetreCartographieWifi extends JFrame {
 		this.buttonValiderDimensions.setFont(new Font("Helvetica", Font.PLAIN, 17));
 		this.buttonValiderDimensions.setActionCommand(ActionMenu.NOM_ACTION_VALIDER_DIMENSION);
 		this.buttonValiderDimensions.setBounds(545, 120, 189, 51);
-		this.getContentPane().add(buttonValiderDimensions);
+		this.getContentPane().add(this.buttonValiderDimensions);
 
 		// Boutton exporter résultat
 		// Pas de commande attribuée pour le moment
@@ -116,35 +116,36 @@ public class FenetreCartographieWifi extends JFrame {
 
 		// label texte
 		this.labelLargeurSalle = new JLabel("Largeur");
-		labelLargeurSalle.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labelLargeurSalle.setHorizontalAlignment(SwingConstants.CENTER);
 		this.labelLargeurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
 		this.labelLargeurSalle.setBounds(405, 562, 93, 34);
 		this.getContentPane().add(this.labelLargeurSalle);
 
 		this.lblHauteurSalle = new JLabel("Hauteur");
-		lblHauteurSalle.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblHauteurSalle.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblHauteurSalle.setBounds(20, 352, 82, 29);
 		this.getContentPane().add(this.lblHauteurSalle);
 		this.lblHauteurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
 		// Champ pour remplir inofrmations sur la salle
-		this.textFieldLargeur = new JTextField();
-		this.textFieldLargeur.setBounds(381, 120, 66, 26);
-		this.getContentPane().add(this.textFieldLargeur);
-		this.textFieldLargeur.setColumns(10);
+		FenetreCartographieWifi.textFieldLargeur = new JTextField();
+		FenetreCartographieWifi.textFieldLargeur.setBounds(381, 120, 66, 26);
+		this.getContentPane().add(FenetreCartographieWifi.textFieldLargeur);
+		FenetreCartographieWifi.textFieldLargeur.setColumns(10);
 
-		this.textFieldHauteur = new JTextField();
-		this.textFieldHauteur.setColumns(10);
-		this.textFieldHauteur.setBounds(381, 158, 66, 26);
-		this.getContentPane().add(this.textFieldHauteur);
+		FenetreCartographieWifi.textFieldHauteur = new JTextField();
+		FenetreCartographieWifi.textFieldHauteur.setColumns(10);
+		FenetreCartographieWifi.textFieldHauteur.setBounds(381, 158, 66, 26);
+		this.getContentPane().add(FenetreCartographieWifi.textFieldHauteur);
 
 		// Ajout du rectangle dans le panel crée specialement pour ca
 		this.panelSalle = new VueSalle();
 		this.panelSalle.setBounds(114, 214, 620, 336);
+		//		this.panelSalle.setMinimumSize(new Dimension(620, 336));
 		this.getContentPane().add(this.panelSalle);
 
-		this.textFieldLargeur.addActionListener(new actionListener(this.panelSalle));
-		this.textFieldHauteur.addActionListener(new actionListener(this.panelSalle));
+		FenetreCartographieWifi.textFieldLargeur.addActionListener(new actionListener(this.panelSalle));
+		FenetreCartographieWifi.textFieldHauteur.addActionListener(new actionListener(this.panelSalle));
 
 		// on centre la fenetre
 		Toolkit tool = this.getToolkit();
@@ -171,13 +172,13 @@ public class FenetreCartographieWifi extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Largeur " + FenetreCartographieWifi.this.textFieldLargeur.getText());
-			System.out.println("Hauteur " + FenetreCartographieWifi.this.textFieldHauteur.getText());
+			System.out.println("Largeur " + FenetreCartographieWifi.textFieldLargeur.getText());
+			System.out.println("Hauteur " + FenetreCartographieWifi.textFieldHauteur.getText());
 			try {
 				this.vueSalle.getSalle()
-						.setHauteur(new Integer(FenetreCartographieWifi.this.textFieldHauteur.getText()));
+				.setHauteur(new Integer(FenetreCartographieWifi.textFieldHauteur.getText()));
 				this.vueSalle.getSalle()
-						.setLargeur(new Integer(FenetreCartographieWifi.this.textFieldLargeur.getText()));
+				.setLargeur(new Integer(FenetreCartographieWifi.textFieldLargeur.getText()));
 				this.vueSalle.getSalle().calculListePointMesure();
 				for (ZoneMesure zoneMesure : this.vueSalle.getSalle().getListeZoneMesure()) {
 					System.out.println(zoneMesure);
