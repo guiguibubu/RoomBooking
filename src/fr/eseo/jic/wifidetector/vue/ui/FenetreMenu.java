@@ -59,8 +59,8 @@ public class FenetreMenu extends JFrame {
 		this.btnCartographier.setBounds(395, 209, 229, 72);
 		this.btnCartographier.setActionCommand(ActionMenu.NOM_ACTION_CARTOGRAPHIER);
 		this.btnCartographier.setText("Cartographier la salle");
-		this.btnCartographier.setForeground(Color.WHITE);
-		this.btnCartographier.setBackground(Color.BLACK);
+		this.btnCartographier.setForeground(Color.BLACK);
+		this.btnCartographier.setBackground(Color.WHITE);
 		this.getContentPane().add(this.btnCartographier);
 
 		// Création du bouton pour quitter l'appli
