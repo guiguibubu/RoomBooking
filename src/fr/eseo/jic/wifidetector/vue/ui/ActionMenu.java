@@ -10,13 +10,13 @@ public class ActionMenu extends AbstractAction {
 	public static final String NOM_ACTION_INFO_RESEAU = "Info reseau";
 	public static final String NOM_ACTION_CARTOGRAPHIER = "Cartographie du réseau wifi";
 	public static final String NOM_ACTION_FENETRE_START = "Start";
-
 	public static final String NOM_ACTION_RETOUR = "Retour au menu";
 	public static final String NOM_ACTION_RETOUR_MENU = "Retour menu";
 	public static final String NOM_ACTION_RETOUR_ACCUEIL = "Retour fenetre accueil";
 	public static final String NOM_ACTION_FERMER = "Fermer fenetre";
 	public static final String NOM_ACTION_CLOSE = "Fermer WifiDetector";
 	public static final String NOM_ACTION_VALIDER_DIMENSION = "Valider dimensions";
+	public static final String NOM_ACTION_AFFICHER_RESULTAT = "Afficher fenetre resultat";
 
 	public ActionMenu() {
 		super();
@@ -69,11 +69,23 @@ public class ActionMenu extends AbstractAction {
 			FenetreWarningConnexion.getInstance().setVisible(false);
 			FenetreAccueil.getInstance().setVisible(true);
 		}
-		
+		/**
+		 * Instructions à ajouter ici pour le bouton valider
+		 * 
+		 */
 		if (event.getActionCommand() == NOM_ACTION_VALIDER_DIMENSION) {
 			System.out.println("Dimension validées");
 			System.out.println("Largeur " + FenetreCartographieWifi.textFieldLargeur.getText());
 			System.out.println("Hauteur " + FenetreCartographieWifi.textFieldHauteur.getText());
+			// Ajouter des instructions ici
+		}
+		/*
+		 * Instruction à ajouter ici pour le bouton afficher résultat
+		 */
+		if (event.getActionCommand() == NOM_ACTION_AFFICHER_RESULTAT) {
+			System.out.println("Dimension validées");
+			FenetreAffichageAcquisitions.getInstance().setVisible(true);
+			FenetreCartographieWifi.getInstance().setVisible(false);
 			// Ajouter des instructions ici
 		}
 

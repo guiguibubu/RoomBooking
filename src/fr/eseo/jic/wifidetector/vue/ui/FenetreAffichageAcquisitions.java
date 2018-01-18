@@ -98,7 +98,7 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		 * Mettre à partir d'ici les info que l'on veut afficher dans les
 		 * différents label
 		 */
-		labelMoyenneDebitDescendantInfo = new JLabel("1");
+		labelMoyenneDebitDescendantInfo = new JLabel("3");
 		labelMoyenneDebitDescendantInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelMoyenneDebitDescendantInfo.setFont(new Font("Helvetica", Font.PLAIN, 19));
 		labelMoyenneDebitDescendantInfo.setBounds(457, 221, 152, 29);
@@ -110,7 +110,7 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		labelDebitEntrantInfo.setBounds(457, 181, 152, 29);
 		getContentPane().add(labelDebitEntrantInfo);
 
-		labelQualitéSignalInfo = new JLabel("3");
+		labelQualitéSignalInfo = new JLabel("1");
 		labelQualitéSignalInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelQualitéSignalInfo.setFont(new Font("Helvetica", Font.PLAIN, 19));
 		labelQualitéSignalInfo.setBounds(457, 141, 152, 29);
