@@ -28,7 +28,7 @@ public class FenetreCartographieWifi extends JFrame {
 	public static final Color COLOR_PAR_DEFAUT = Color.WHITE;
 
 	private static final int LARGEUR_FENETRE_MIN = 800;
-	private static final int HAUTEUR_FENETRE_MIN = 700;
+	private static final int HAUTEUR_FENETRE_MIN = 1000;
 
 	public static FenetreCartographieWifi instance;
 	private JLabel labelDimensionSalle;
@@ -37,8 +37,8 @@ public class FenetreCartographieWifi extends JFrame {
 
 	private VueSalle panelSalle;
 	private JLabel labelLargeurSalle;
-	static JTextField textFieldLargeur;
-	static JTextField textFieldHauteur;
+	private JTextField textFieldLargeur;
+	private JTextField textFieldHauteur;
 	private JLabel lblLargeur;
 	private JLabel labelHauteur;
 	private JButton buttonValiderDimensions;
@@ -76,7 +76,7 @@ public class FenetreCartographieWifi extends JFrame {
 		// Label version en bas
 		this.lblVersion = new JLabel("Version 1.0 2018. Tous droits réservés.");
 		this.lblVersion.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		this.lblVersion.setBounds(297, 629, 229, 22);
+		this.lblVersion.setBounds(297, 913, 229, 22);
 		this.getContentPane().add(this.lblVersion);
 
 		this.lblLargeur = new JLabel("Largeur (en m):");
@@ -92,7 +92,7 @@ public class FenetreCartographieWifi extends JFrame {
 		// Boutton fermer fenetre
 		this.btnFermer = new JButton(new ActionMenu());
 		this.btnFermer.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		this.btnFermer.setBounds(667, 599, 87, 51);
+		this.btnFermer.setBounds(667, 883, 87, 51);
 		this.btnFermer.setText("Retour");
 		this.btnFermer.setActionCommand(ActionMenu.NOM_ACTION_RETOUR_MENU);
 		this.getContentPane().add(this.btnFermer);
@@ -110,41 +110,43 @@ public class FenetreCartographieWifi extends JFrame {
 		this.buttonAfficherResultat.setText("Afficher résultat");
 		this.buttonAfficherResultat.setFont(new Font("Helvetica", Font.PLAIN, 17));
 		this.buttonAfficherResultat.setActionCommand(ActionMenu.NOM_ACTION_AFFICHER_RESULTAT);
-		this.buttonAfficherResultat.setBounds(30, 599, 189, 51);
+		this.buttonAfficherResultat.setBounds(30, 883, 189, 51);
 		this.getContentPane().add(this.buttonAfficherResultat);
 
 		// label texte
 		this.labelLargeurSalle = new JLabel("Largeur");
 		this.labelLargeurSalle.setHorizontalAlignment(SwingConstants.CENTER);
 		this.labelLargeurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
-		this.labelLargeurSalle.setBounds(405, 562, 93, 34);
+		this.labelLargeurSalle.setBounds(405, 846, 93, 34);
 		this.getContentPane().add(this.labelLargeurSalle);
 
 		this.lblHauteurSalle = new JLabel("Hauteur");
 		this.lblHauteurSalle.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblHauteurSalle.setBounds(20, 352, 82, 29);
+		this.lblHauteurSalle.setBounds(20, 436, 82, 29);
 		this.getContentPane().add(this.lblHauteurSalle);
 		this.lblHauteurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
 		// Champ pour remplir inofrmations sur la salle
-		FenetreCartographieWifi.textFieldLargeur = new JTextField();
-		FenetreCartographieWifi.textFieldLargeur.setBounds(381, 120, 66, 26);
-		this.getContentPane().add(FenetreCartographieWifi.textFieldLargeur);
-		FenetreCartographieWifi.textFieldLargeur.setColumns(10);
+		this.textFieldLargeur = new JTextField();
+		this.textFieldLargeur.setBounds(381, 120, 66, 26);
+		this.getContentPane().add(this.textFieldLargeur);
+		this.textFieldLargeur.setColumns(10);
 
-		FenetreCartographieWifi.textFieldHauteur = new JTextField();
-		FenetreCartographieWifi.textFieldHauteur.setColumns(10);
-		FenetreCartographieWifi.textFieldHauteur.setBounds(381, 158, 66, 26);
-		this.getContentPane().add(FenetreCartographieWifi.textFieldHauteur);
+		this.textFieldHauteur = new JTextField();
+		this.textFieldHauteur.setColumns(10);
+		this.textFieldHauteur.setBounds(381, 158, 66, 26);
+		this.getContentPane().add(this.textFieldHauteur);
 
 		// Ajout du rectangle dans le panel crée specialement pour ca
 		this.panelSalle = new VueSalle();
-		this.panelSalle.setBounds(114, 214, 620, 336);
-		// this.panelSalle.setMinimumSize(new Dimension(620, 336));
+		this.panelSalle.setBounds(114, 214, 620, 620);
+		this.panelSalle.setBackground(COLOR_PAR_DEFAUT);
 		this.getContentPane().add(this.panelSalle);
+		System.out.println("Création panel "+this.panelSalle.hashCode());
 
-		FenetreCartographieWifi.textFieldLargeur.addActionListener(new actionListener(this.panelSalle));
-		FenetreCartographieWifi.textFieldHauteur.addActionListener(new actionListener(this.panelSalle));
+		ActionListenerEnter actionListener = new ActionListenerEnter(this.panelSalle, this.textFieldLargeur, this.textFieldHauteur);
+		this.textFieldLargeur.addActionListener(actionListener);
+		this.textFieldHauteur.addActionListener(actionListener);
 
 		// on centre la fenetre
 		Toolkit tool = this.getToolkit();
@@ -161,22 +163,31 @@ public class FenetreCartographieWifi extends JFrame {
 		return FenetreCartographieWifi.instance;
 	}
 
-	class actionListener implements ActionListener {
+	class ActionListenerEnter implements ActionListener {
 		VueSalle vueSalle;
+		JTextField textFieldLargeur;
+		JTextField textFieldHauteur;
 
-		protected actionListener(VueSalle vueSalle) {
+		protected ActionListenerEnter(VueSalle vueSalle, JTextField textFieldLargeur, JTextField textFieldHauteur) {
 			super();
 			this.vueSalle = vueSalle;
+			this.textFieldLargeur = textFieldLargeur;
+			this.textFieldHauteur = textFieldHauteur;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Largeur " + FenetreCartographieWifi.textFieldLargeur.getText());
-			System.out.println("Hauteur " + FenetreCartographieWifi.textFieldHauteur.getText());
+			String largeurStr = this.textFieldLargeur.getText();
+			String hauteurStr = this.textFieldHauteur.getText();
+			System.out.println("Largeur " + largeurStr);
+			System.out.println("Hauteur " + hauteurStr);
 			try {
-				this.vueSalle.getSalle().setHauteur(new Integer(FenetreCartographieWifi.textFieldHauteur.getText()));
-				this.vueSalle.getSalle().setLargeur(new Integer(FenetreCartographieWifi.textFieldLargeur.getText()));
+				int largeur = new Integer(largeurStr);
+				int hauteur = new Integer(hauteurStr);
+				this.vueSalle.getSalle().setHauteur(hauteur);
+				this.vueSalle.getSalle().setLargeur(largeur);
 				this.vueSalle.getSalle().calculListePointMesure();
+				this.vueSalle.repaint();
 				for (ZoneMesure zoneMesure : this.vueSalle.getSalle().getListeZoneMesure()) {
 					System.out.println(zoneMesure);
 				}
@@ -188,7 +199,15 @@ public class FenetreCartographieWifi extends JFrame {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
-
 		}
 	}
+
+	public VueSalle getPanelSalle() {return this.panelSalle;}
+	public void setPanelSalle(VueSalle panelSalle) {this.panelSalle = panelSalle;}
+
+	public JTextField getTextFieldLargeur() {return this.textFieldLargeur;}
+	public void setTextFieldLargeur(JTextField textFieldLargeur) {this.textFieldLargeur = textFieldLargeur;}
+
+	public JTextField getTextFieldHauteur() {return this.textFieldHauteur;}
+	public void setTextFieldHauteur(JTextField textFieldHauteur) {this.textFieldHauteur = textFieldHauteur;}
 }

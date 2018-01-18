@@ -3,6 +3,7 @@ package fr.eseo.jic.wifidetector.vue.ui;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 
 public class ActionMenu extends AbstractAction {
 	private static final long serialVersionUID = 1L;
@@ -71,13 +72,26 @@ public class ActionMenu extends AbstractAction {
 		}
 		/**
 		 * Instructions à ajouter ici pour le bouton valider
-		 * 
+		 *
 		 */
 		if (event.getActionCommand() == NOM_ACTION_VALIDER_DIMENSION) {
-			System.out.println("Dimension validées");
-			System.out.println("Largeur " + FenetreCartographieWifi.textFieldLargeur.getText());
-			System.out.println("Hauteur " + FenetreCartographieWifi.textFieldHauteur.getText());
-			// Ajouter des instructions ici
+			String largeurStr = FenetreCartographieWifi.getInstance().getTextFieldLargeur().getText();
+			String hauteurStr = FenetreCartographieWifi.getInstance().getTextFieldHauteur().getText();
+			try {
+				int largeur = new Integer(largeurStr);
+				int hauteur = new Integer(hauteurStr);
+				FenetreCartographieWifi.getInstance().getPanelSalle().getSalle().setHauteur(hauteur);
+				FenetreCartographieWifi.getInstance().getPanelSalle().getSalle().setLargeur(largeur);
+				FenetreCartographieWifi.getInstance().getPanelSalle().getSalle().calculListePointMesure();
+				FenetreCartographieWifi.getInstance().getPanelSalle().repaint();
+			} catch (NumberFormatException e1) {
+				JOptionPane.showMessageDialog(null, "Merci de saisir des chiffres", "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+				e1.printStackTrace();
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+				e1.printStackTrace();
+			}
 		}
 		/*
 		 * Instruction à ajouter ici pour le bouton afficher résultat
