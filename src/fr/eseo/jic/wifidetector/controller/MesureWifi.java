@@ -9,7 +9,8 @@ import java.util.Date;
 
 public class MesureWifi {
 
-	public static final String SIGNAL_FR = "Signal";
+	public static final String SIGNAL_WIN_FR = "Signal";
+	public static final String SIGNAL_LINUX_FR = "Signal level";
 
 	public static final String WIFI_ETUDIANT = "Wifi_etudiants";
 
@@ -34,8 +35,8 @@ public class MesureWifi {
 			{
 				InputStream input = mCon.getInputStream();
 				int numberLoop = 0;
-				long mStart = new Date().getTime();
 				int lengthBuffer = buffer.length; // en Byte
+				long mStart = new Date().getTime();
 
 				while(input.read(buffer) > 0 && (new Date().getTime())-mStart < 10000)
 				{
@@ -79,7 +80,7 @@ public class MesureWifi {
 	/**
 	 *
 	 * @param wifiName Nom du réseau Wifi (Example : Livebox-6589)
-	 * @return Signal wifi du réseau sélectionné en pourcentage (Max : 99 %)
+	 * @return Signal wifi du réseau sélectionné en pourcentage (Max : 99 %, dbm = (pourcentage/2)-100)
 	 */
 	public static int getSignal(String wifiName)
 	{
@@ -106,9 +107,7 @@ public class MesureWifi {
 		String signalDbm = "0";
 		try
 		{
-			String commandWlan = "iwconfig";
-			Process cmd;
-			cmd = Runtime.getRuntime().exec("cmd /c " + commandWlan);
+			Process cmd = Runtime.getRuntime().exec("iwconfig");
 			cmd.waitFor();
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(cmd.getInputStream()));
@@ -121,7 +120,7 @@ public class MesureWifi {
 				line = reader.readLine();
 				if(rightSsid == true)
 				{
-					if(line.contains(SIGNAL_FR))
+					if(line.contains(SIGNAL_LINUX_FR))
 					{
 						signalDbm = line.substring(line.indexOf("Signal level=")+13, line.indexOf(" dBm"));
 						rightSsid = false;
@@ -133,6 +132,7 @@ public class MesureWifi {
 					rightSsid = line.contains(wifiName);
 				}
 			}
+			cmd.destroy();
 		}
 		catch (Exception e)
 		{
@@ -152,9 +152,7 @@ public class MesureWifi {
 		String signal = "0";
 		try
 		{
-			String commandWlan = "netsh wlan show network mode=bssid";
-			Process cmd;
-			cmd = Runtime.getRuntime().exec("cmd /c " + commandWlan);
+			Process cmd = Runtime.getRuntime().exec("cmd /c netsh wlan show network mode=bssid");
 			cmd.waitFor();
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(cmd.getInputStream()));
@@ -167,7 +165,7 @@ public class MesureWifi {
 				line = reader.readLine();
 				if(rightSsid == true)
 				{
-					if(line.contains(SIGNAL_FR))
+					if(line.contains(SIGNAL_WIN_FR))
 					{
 						signal = line.substring(line.indexOf(": ") + 2, line.indexOf("%"));
 						rightSsid = false;
@@ -179,6 +177,7 @@ public class MesureWifi {
 					rightSsid = line.contains(wifiName);
 				}
 			}
+			cmd.destroy();
 		}
 		catch (Exception e)
 		{
@@ -196,13 +195,12 @@ public class MesureWifi {
 		String ssidList = "None";
 		try
 		{
-			String commandWlan = "netsh wlan show network";
-			Process cmd;
-			cmd = Runtime.getRuntime().exec("cmd /c " + commandWlan);
+			Process cmd = Runtime.getRuntime().exec("cmd /c netsh wlan show network");
 			cmd.waitFor();
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(cmd.getInputStream()));
 			String line = reader.readLine();
+			
 			while(line != null)
 			{
 				line = reader.readLine();
@@ -211,6 +209,7 @@ public class MesureWifi {
 					ssidList = line.replace("SSID " + 1 + "�: ", "");
 				}
 			}
+			cmd.destroy();
 		}
 		catch (Exception e)
 		{
