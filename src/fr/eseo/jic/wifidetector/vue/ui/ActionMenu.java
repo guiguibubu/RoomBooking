@@ -17,6 +17,7 @@ public class ActionMenu extends AbstractAction {
 	public static final String NOM_ACTION_CLOSE = "Fermer WifiDetector";
 	public static final String NOM_ACTION_VALIDER_DIMENSION = "Valider dimensions";
 	public static final String NOM_ACTION_AFFICHER_RESULTAT = "Afficher fenetre resultat";
+	public static final String NOM_ACTION_ACQUERIR_INFO_RESEAUX = "Acquerir info sur le reseau";
 
 	public ActionMenu() {
 		super();
@@ -86,6 +87,14 @@ public class ActionMenu extends AbstractAction {
 			System.out.println("Dimension validées");
 			FenetreAffichageAcquisitions.getInstance().setVisible(true);
 			FenetreCartographieWifi.getInstance().setVisible(false);
+			// Ajouter des instructions ici
+		}
+		/**
+		 * Instructions à ajouter ici pour le bouton acquisition des info réseaux
+		 * 
+		 */
+		if (event.getActionCommand() == NOM_ACTION_ACQUERIR_INFO_RESEAUX) {
+			System.out.println("Prendre info");
 			// Ajouter des instructions ici
 		}
 

@@ -28,7 +28,7 @@ public class FenetreCartographieWifi extends JFrame {
 	public static final Color COLOR_PAR_DEFAUT = Color.WHITE;
 
 	private static final int LARGEUR_FENETRE_MIN = 800;
-	private static final int HAUTEUR_FENETRE_MIN = 700;
+	private static final int HAUTEUR_FENETRE_MIN = 800;
 
 	public static FenetreCartographieWifi instance;
 	private JLabel labelDimensionSalle;
@@ -41,7 +41,7 @@ public class FenetreCartographieWifi extends JFrame {
 	static JTextField textFieldHauteur;
 	private JLabel lblLargeur;
 	private JLabel labelHauteur;
-	private JButton buttonValiderDimensions;
+	private JButton buttonPrendreInfoReseau;
 
 	public FenetreCartographieWifi() {
 		// Création de la fenetre
@@ -76,7 +76,7 @@ public class FenetreCartographieWifi extends JFrame {
 		// Label version en bas
 		this.lblVersion = new JLabel("Version 1.0 2018. Tous droits réservés.");
 		this.lblVersion.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		this.lblVersion.setBounds(297, 629, 229, 22);
+		this.lblVersion.setBounds(326, 736, 229, 22);
 		this.getContentPane().add(this.lblVersion);
 
 		this.lblLargeur = new JLabel("Largeur (en m):");
@@ -92,37 +92,48 @@ public class FenetreCartographieWifi extends JFrame {
 		// Boutton fermer fenetre
 		this.btnFermer = new JButton(new ActionMenu());
 		this.btnFermer.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		this.btnFermer.setBounds(667, 599, 87, 51);
+		this.btnFermer.setBounds(685, 675, 87, 51);
 		this.btnFermer.setText("Retour");
 		this.btnFermer.setActionCommand(ActionMenu.NOM_ACTION_RETOUR_MENU);
 		this.getContentPane().add(this.btnFermer);
 
-		this.buttonValiderDimensions = new JButton(new ActionMenu());
-		this.buttonValiderDimensions.setText("Valider");
-		this.buttonValiderDimensions.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		this.buttonValiderDimensions.setActionCommand(ActionMenu.NOM_ACTION_VALIDER_DIMENSION);
-		this.buttonValiderDimensions.setBounds(545, 120, 189, 51);
-		this.getContentPane().add(this.buttonValiderDimensions);
+		JButton button = new JButton(new ActionMenu());
+		button.setText("Valider dimensions");
+		button.setFont(new Font("Helvetica", Font.PLAIN, 17));
+		button.setActionCommand("Valider dimensions");
+		button.setBounds(545, 120, 189, 51);
+		getContentPane().add(button);
 
-		// Boutton exporter résultat
+		this.buttonPrendreInfoReseau = new JButton(new ActionMenu());
+		this.buttonPrendreInfoReseau.setText("Acquérir informations");
+		this.buttonPrendreInfoReseau.setFont(new Font("Helvetica", Font.PLAIN, 17));
+		// Ajouter dans le fichier ActionMenu
+		// des actions pour le bouton suivant
+		this.buttonPrendreInfoReseau.setActionCommand(ActionMenu.NOM_ACTION_ACQUERIR_INFO_RESEAUX);
+		this.buttonPrendreInfoReseau.setBounds(30, 675, 189, 51);
+		this.getContentPane().add(this.buttonPrendreInfoReseau);
+
+		// Boutton afficher résultat
 		// Pas de commande attribuée pour le moment
+		// Ajouter dans le fichier ActionMenu
+		// des actions pour le bouton suivant
 		this.buttonAfficherResultat = new JButton(new ActionMenu());
 		this.buttonAfficherResultat.setText("Afficher résultat");
 		this.buttonAfficherResultat.setFont(new Font("Helvetica", Font.PLAIN, 17));
 		this.buttonAfficherResultat.setActionCommand(ActionMenu.NOM_ACTION_AFFICHER_RESULTAT);
-		this.buttonAfficherResultat.setBounds(30, 599, 189, 51);
+		this.buttonAfficherResultat.setBounds(347, 675, 189, 51);
 		this.getContentPane().add(this.buttonAfficherResultat);
 
 		// label texte
 		this.labelLargeurSalle = new JLabel("Largeur");
 		this.labelLargeurSalle.setHorizontalAlignment(SwingConstants.CENTER);
 		this.labelLargeurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
-		this.labelLargeurSalle.setBounds(405, 562, 93, 34);
+		this.labelLargeurSalle.setBounds(405, 605, 93, 34);
 		this.getContentPane().add(this.labelLargeurSalle);
 
 		this.lblHauteurSalle = new JLabel("Hauteur");
 		this.lblHauteurSalle.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblHauteurSalle.setBounds(20, 352, 82, 29);
+		this.lblHauteurSalle.setBounds(20, 410, 82, 29);
 		this.getContentPane().add(this.lblHauteurSalle);
 		this.lblHauteurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
@@ -139,7 +150,7 @@ public class FenetreCartographieWifi extends JFrame {
 
 		// Ajout du rectangle dans le panel crée specialement pour ca
 		this.panelSalle = new VueSalle();
-		this.panelSalle.setBounds(114, 214, 620, 336);
+		this.panelSalle.setBounds(114, 257, 620, 336);
 		// this.panelSalle.setMinimumSize(new Dimension(620, 336));
 		this.getContentPane().add(this.panelSalle);
 

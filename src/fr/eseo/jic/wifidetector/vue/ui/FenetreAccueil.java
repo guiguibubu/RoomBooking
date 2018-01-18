@@ -55,8 +55,8 @@ public class FenetreAccueil extends JFrame {
 		this.progressBar.setBounds(25, 300, 350, 50);
 		this.progressBar.setBackground(new Color(255, 255, 255));
 
-		//		this.t = new Thread(new Traitement());
-		//		this.t.start();
+		// this.t = new Thread(new Traitement());
+		// this.t.start();
 		Traitement traitementProgressBar = new Traitement(this.progressBar);
 		traitementProgressBar.start();
 		// Logo + texte WifiDetection
@@ -115,7 +115,7 @@ public class FenetreAccueil extends JFrame {
 		private Thread thread;
 		JProgressBar progressBar;
 
-		public Traitement(JProgressBar progressBar){
+		public Traitement(JProgressBar progressBar) {
 			super();
 			this.progressBar = progressBar;
 		}
@@ -139,17 +139,17 @@ public class FenetreAccueil extends JFrame {
 			}
 		}
 
-		public synchronized void start(){
-			if(this.running) {
+		public synchronized void start() {
+			if (this.running) {
 				return;
 			}
 			this.running = true;
 			this.thread = new Thread(this);
-			this.thread.start();//va chercher le run() car Runnable
+			this.thread.start();// va chercher le run() car Runnable
 		}
 
 		public synchronized void stop() {
-			if(!this.running){
+			if (!this.running) {
 				return;
 			}
 			this.running = false;
@@ -161,7 +161,7 @@ public class FenetreAccueil extends JFrame {
 		}
 	}
 
-	class TraitementWifi implements Runnable{
+	class TraitementWifi implements Runnable {
 
 		private boolean running = false;
 		private Thread thread;
@@ -172,17 +172,17 @@ public class FenetreAccueil extends JFrame {
 			this.stop();
 		}
 
-		public synchronized void start(){
-			if(this.running) {
+		public synchronized void start() {
+			if (this.running) {
 				return;
 			}
 			this.running = true;
 			this.thread = new Thread(this);
-			this.thread.start();//va chercher le run() car Runnable
+			this.thread.start();// va chercher le run() car Runnable
 		}
 
 		public synchronized void stop() {
-			if(!this.running){
+			if (!this.running) {
 				return;
 			}
 			this.running = false;
