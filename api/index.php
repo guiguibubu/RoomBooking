@@ -1,45 +1,66 @@
-<pre>
 <?php
 
 /*
  * Router for api requests
- *
  */
 
+header('Content-Type: application/json');
+
 include "tools/bdd.php";
-include "tools/json.php";
 include "tools/misc.php";
 
 $query = strtok($_SERVER['REQUEST_URI'], '?');
 $method = $_SERVER['REQUEST_METHOD'];
 
 $query = explode('/', $query);
-//echo $method . ' ' . implode('/', $query);
 
 
- /*if($query[1] !== 'api') {
+array_shift($query);
+//get rid of first /
 
- }*/
+array_shift($query);
+//get rid of api prefix
 
-array_shift($query); //get rid of first /
-array_shift($query); //get rid of api prefix
+$_USER = [];
 
+$tokenNeeded = ['bookings.my'];
 
+if ($method === 'GET' && !in_array(implode('.', $query), $tokenNeeded)) {
+	include "routes/" . implode('.', $query) . ".php";
+} else {
 
+	$token = !empty($_SERVER['HTTP_X_TOKEN']) ? $_SERVER['HTTP_X_TOKEN'] : '';
 
-//echo 'managed by : ' . "routes/" . implode('.', $query) . '.php';
+	$req = $db -> prepare('SELECT user_id FROM tokens WHERE token = ?');
+	$req -> execute(array($token));
+	$token = $req -> fetch(PDO::FETCH_ASSOC);
 
-include "routes/" . implode('.', $query) . ".php";
+	if ($token['user_id'] || $query[0] === 'auth') {
 
-/*$json = json_decode(file_get_contents("salles.json"), true);
+		$_USER['id'] = intval($token['user_id']);
+		$body = file_get_contents('php://input');
 
-$prep = $db->prepare('INSERT INTO rooms(name, location, building, floor, comment) VALUES (?, ?, ?, ?, ?)');
+		if ($method === 'PUT') {
+			if (isJSON($body))
+				$_PUT = json_decode($body, true);
+			else
+				parse_str($body, $_PUT);
+		} else if ($method === 'DELETE') {
+			if (isJSON($body))
+				$_DELETE = json_decode($body, true);
+			else
+				parse_str($body, $_DELETE);
+		} else if ($method === 'POST') {
+			if (isJSON($body))
+				$_POST = json_decode($body, true);
+			else
+				parse_str($body, $_POST);
+		}
 
-foreach ($json['salles'] as $salle) {
-	print_r($salle);
-	echo "\n";
-	
-	$prep->execute(array($salle['name'], $salle['num'], $salle['bat'], $salle['floor'], $salle['info']));
-}*/
+		include "routes/" . implode('.', $query) . ".php";
+		
+	} else {
+		echo json_encode(['err' => 'Unable to id user with token']);
+	}
+}
 ?>
-</pre>
