@@ -1,0 +1,112 @@
+<!-- home page -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>B00kESEO</title>
+    <script src="ressources/jquery.js"></script>
+    <script src="ressources/vue.js"></script>
+    <script src="ressources/pagination.min.js"></script>
+    <script src="ressources/core.js"></script>
+    <script src="ressources/sha256-min.js"></script>
+    <script src="process.js"></script>
+    <script src="https://use.fontawesome.com/038b4d1a16.js"></script>
+    <link rel="stylesheet" href="ressources/pagination.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div id="accountMenu">
+    <span id="login-txt">{{login}}</span>
+    <button id="signout">Déconnexion</button>
+    <i class="fa fa-user-circle-o fa-2x"  id="login-btn"></i>
+</div>
+
+<div class="dropdown">
+    <button class="dropbtn"><i class="fa fa-bars fa-3x" aria-hidden="false"></i></button>
+    <div class="dropdown-content">
+        <span id="menu-home">Accueil</span>
+        <span id="menu-now">Maintenant</span>
+        <span id="menu-later">Plus Tard</span>
+        <span id="menu-edit" style="display: none">Mes réservations</span>
+        <span id="menu-display">Liste des salles</span>
+    </div>
+</div>
+
+<div id="home">
+        <span>B00kESEO</span>
+        <div id="home-btn">
+            <button id="btn-now">Maintenant</button>
+            <button id="btn-later">Pour plus tard</button>
+        </div>
+    </div>
+
+    <!-- The room list is hidden at first -->
+    <div id="room-list" style="display: none">
+        <room-item v-for="item in roomList" v-bind:room="item" v-bind:key="item.id"></room-item>
+        <br>
+        <div id="pagination-container"></div>
+    </div>
+    <div id="room-list-later" style="display: none">
+        <room-item-later v-for="item in roomList" v-bind:room="item" v-bind:key="item.id"></room-item-later>
+        <br>
+        <div id="pagination-container-later"></div>
+    </div>
+    <div id="room-list-display" style="display: none">
+        <room-item-display v-for="item in roomList" v-bind:room="item" v-bind:key="item.id"></room-item-display>
+         <br>
+         <div id="pagination-container-display"></div>
+    </div>
+    <div id="room-list-edit" style="display: none">
+        <room-item-edit v-for="item in roomList" v-bind:booking="item" v-bind:key="item.id"></room-item-edit>
+         <br>
+         <div id="pagination-container-edit"></div>
+    </div>
+</body>
+
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fa fa-user-circle-o fa-2x" aria-hidden="false"></i>
+            <span class="close">&times;</span>
+        </div>
+        <form id="login-form">
+            <input id="login-input" class="modal-input" type="text" placeholder="Login">
+            <span class="error emptyLoginInput">Login invalide (2-25 caractères)</span>
+            <input id="password-input" class="modal-input" type="password" placeholder="Mot de passe">
+            <span class="error emptyPasswordInput">Mot de passe invalide (2-25 caractères)</span>
+            <span class="error incorrect">Mot de passe ou login incorrect</span>
+            <input class="modal-input confirm" type="submit" value="Se connecter">
+            <span class="signup-btn"> Créer un compte</span>
+        </form>
+    </div>
+</div>
+
+<div id="signup-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fa fa-user-circle-o fa-2x" aria-hidden="false"></i>
+            <span class="header-text">Créer un compte</span>
+            <span class="close">&times;</span>
+        </div>
+        <form id="signup-form">
+            <input id="firstname-signup" class="modal-input" type="text" placeholder="Prénom">
+            <span class="error emptyFirstnameSignup">Prénom invalide (2-25 caractères)</span>
+            <input id="lastname-signup" class="modal-input" type="text" placeholder="Nom">
+            <span class="error emptyLastnameSignup">Nom invalide (2-25 caractères)</span>
+            <input id="login-signup" class="modal-input" type="text" placeholder="Login">
+            <span class="error emptyLoginSignup">Login invalide (2-25 caractères)</span>
+            <span class="error used">Login déjà utilisé</span>
+            <input id="password-signup" class="modal-input" type="password" placeholder="Mot de passe">
+            <span class="error emptyPasswordSignup">Mot de passe invalide (2-25 caractères)</span>
+            <input id="password2-signup" class="modal-input" type="password" placeholder="Confirmation">
+            <span class="error different">Mots de passe différents</span>
+            <input class="modal-input confirm" type="submit" value="Valider">
+        </form>
+    </div>
+</div>
+
+</html>

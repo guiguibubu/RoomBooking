@@ -1,0 +1,424 @@
+/* CSS Styling */
+
+/* Home page style*/
+@import url('https://fonts.googleapis.com/css?family=Cardo:400,400i,700|Josefin+Sans:400,400i,700');
+*{
+	scroll-behavior: smooth;
+}
+#home > span {
+    text-align: center;
+    color: #03438A;
+    font-weight: bold;
+    font-size: 5em;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+#home {
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    margin: auto;
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#home-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#btn-later,
+#btn-now {
+    margin: 10px;
+    background-color: white;
+    border: 1px solid dodgerblue;
+    color: dodgerblue;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 20px;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+#btn-later:hover,
+#btn-now:hover {
+    background-color: dodgerblue;
+    color: white;
+}
+
+/* Account Menu*/
+#accountMenu {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#accountMenu >span {
+    display: none;
+}
+
+#login-btn {
+    color: #03438A;
+    cursor: pointer;
+}
+
+#login-btn:hover {
+    color: dodgerblue;
+}
+
+/* Login and signup modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-header {
+    padding: 3px 16px;
+    background-color: dodgerblue;
+    color: white;
+}
+
+.fa-user-circle-o{
+    color: white;
+    margin: auto;
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    border: 1px solid dodgerblue;
+    width: 350px; /* Could be more or less, depending on screen size */
+    border-radius: 4px;
+}
+
+
+#login-form,
+#signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-input {
+    margin: 5px auto;
+    padding: 2px;
+}
+
+.signup-btn {
+    color: dodgerblue;
+    margin: auto;
+    padding: 2px;
+    font-size: small;
+}
+
+.signup-btn:hover,
+.signup-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.error {
+    display: none;
+    color: red;
+    font-size: small;
+    margin: auto;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+/* Room list styling*/
+#room-list,
+#room-list-later,
+#room-list-display,
+#room-list-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.room {
+    padding: 10px;
+    margin: 10px auto;
+    width: 50%;
+    min-height: 100px;
+    height: auto;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.room:hover {
+	-webkit-transition-duration: 0.6s;
+    transition-duration: 0.6s;
+    background-color: #e6f2ff;
+
+}
+
+.room-infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.datetimeform {
+	width: 45%;
+}
+.room-name {
+    color: dodgerblue;
+    font-weight: bold;
+    font-size: large;
+}
+
+.room-location,
+.room-type {
+    color: #404040;
+}
+
+.room-icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.room-icons * {
+    margin: 2px;
+}
+.room-datetime td:first-child {
+	text-align: right;
+}
+
+.room-datetime td:last-child input{
+	width: 125px;
+	padding: 2px;
+}
+
+.room-book,
+.confirm,
+.book-edit,
+.book-delete {
+    background-color: white;
+    border: 1px solid dodgerblue;
+    color: dodgerblue;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 4px;
+    font-size: 16px;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.room-book:hover,
+.confirm:hover,
+.book-edit:hover {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.book-delete{
+    border-color: red;
+    color: red;
+}
+
+.book-delete:hover {
+    background-color: red;
+    color: white;
+}
+
+.room-confirm {
+    background-color: white;
+    border: 1px solid green;
+    color: green;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 4px;
+    font-size: 16px;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.room-confirm:hover{
+    background-color: green;
+    color: white;
+}
+
+#signout {
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px;
+    font-size: 12px;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+
+#signout:hover{
+    background-color: red;
+    color: white;
+}
+
+select{
+    width: 80px;
+    background-color: white;
+    border: 1px solid dodgerblue;
+    color: dodgerblue;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+/* Pagination */
+#pagination-container,
+#pagination-container-later,
+#pagination-container-display,
+#pagination-container-edit {
+    padding: 5px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.dropbtn {
+    background-color: white;
+    color: #03438A;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover{
+    color: dodgerblue;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content span {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content span:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover {
+    background-color: #03438A;
+}
+
+h1, h2, h3, h4 {
+	font-family:'Cardo', serif;
+}
+
+body {
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Responsiveness */
+
+@media all and (max-width: 1200px) {
+    /*Changing room list width*/
+    .room {
+        width: 90%;
+    }
+
+    /*Changing title size*/
+    #home > span {
+        font-size: 3em;
+    }
+    
+    #room-list-edit .room,
+    #room-list-later .room{
+    	flex-direction: column;
+    	align-items: center;
+    }
+    
+    #room-list-edit .room-icons,
+    #room-list-later .room-icons{
+    	flex-direction: row;
+    }
+
+    #room-list-edit .room-location,
+    #room-list-edit .room-type, #room-list-later .room-location,
+    #room-list-later .room-type {
+        display: none;
+    }
+}
+
+@media all and (max-width: 400px) {
+    /*Changing home buttons direction*/
+    #home-btn {
+        flex-direction: column;
+    }
+}
+

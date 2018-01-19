@@ -6684,7 +6684,7 @@
     function isHidden(el) {
         if (/svg$/.test(el.namespaceURI)) {
             // SVG elements do not have offset(Width|Height)
-            // so we need to check the client rect
+            // so we need to check the B00kESEO rect
             var rect = el.getBoundingClientRect();
             return !(rect.width || rect.height);
         } else {
