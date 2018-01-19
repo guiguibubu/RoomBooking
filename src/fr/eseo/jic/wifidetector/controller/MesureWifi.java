@@ -99,7 +99,7 @@ public class MesureWifi {
 	/**
 	 * Utilise la commande iwconfig et convertit le résultat de dBm en % (dbm = (pourcentage/2)-100)
 	 * Fonctionne seulement sur Linux
-	 * @param wifiName
+	 * @param wifiName Nom du réseau Wifi
 	 * @return Force du signal Wifi en pourcentage de 0 à 100 pour Linux
 	 */
 	public static int getSignalLinux(String wifiName)

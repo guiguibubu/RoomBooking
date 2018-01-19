@@ -6,11 +6,15 @@ import java.util.List;
 import fr.eseo.jic.wifidetector.modele.Mesure;
 import fr.eseo.jic.wifidetector.modele.MesureWifiModel;
 
+/**
+ *	Classe fournissant les méthodes pour les calculs statistiques
+ *
+ */
 public class CalculStatistique {
 
 	/**
 	 * Renvoie les minimums des mesures
-	 * @param listeMesureWifiModel
+	 * @param listeMesureWifiModel La liste des mesures de la qualité du Wifi
 	 * @return une liste de mesures représentant respectivement le minimum de chaque catégorie
 	 */
 	public static List<Mesure> minimumMesures(List<MesureWifiModel> listeMesureWifiModel){
@@ -29,7 +33,7 @@ public class CalculStatistique {
 
 	/**
 	 * Renvoie les maximums des mesures
-	 * @param listeMesureWifiModel
+	 * @param listeMesureWifiModel La liste des mesures de la qualité du Wifi
 	 * @return une liste de mesures représentant respectivement le maximum de chaque catégorie
 	 */
 	public static List<Mesure> maximumMesures(List<MesureWifiModel> listeMesureWifiModel){
@@ -48,7 +52,7 @@ public class CalculStatistique {
 
 	/**
 	 * Renvoie les moyennes des mesures
-	 * @param listeMesureWifiModel
+	 * @param listeMesureWifiModel La liste des mesures de la qualité du Wifi
 	 * @return une liste de mesures représentant respectivement la moyenne de chaque catégorie
 	 */
 	public static List<Mesure> moyenneMesures(List<MesureWifiModel> listeMesureWifiModel){

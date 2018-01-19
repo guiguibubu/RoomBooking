@@ -8,14 +8,21 @@ import javax.swing.JPanel;
 
 import fr.eseo.jic.wifidetector.modele.ZoneMesure;
 
+/**
+ *	Classe représentant la représentation graphique d'une zone de mesure
+ *
+ */
 public class VueZoneMesure extends JPanel {
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * Zone de mesure représentée par la classe
+	 */
 	private ZoneMesure zoneMesure;
-
+	/**
+	 * Constructeur de la représentation graphique de la zone de mesure
+	 * @param zoneMesure La zone de mesure à représenter
+	 */
 	public VueZoneMesure(ZoneMesure zoneMesure) {
 		super();
 		try {
@@ -37,7 +44,14 @@ public class VueZoneMesure extends JPanel {
 		g2D.setStroke(traitPointille);
 		g2D.drawRect(this.zoneMesure.getX(), this.zoneMesure.getY(), this.zoneMesure.getLargeur(), this.zoneMesure.getHauteur());
 	}
-
+	/**
+	 *
+	 * @return La zone de mesure représentée
+	 */
 	public ZoneMesure getZoneMesure() {return this.zoneMesure;}
+	/**
+	 *
+	 * @param zoneMesure La nouvelle zone de mesure à représenter
+	 */
 	public void setZoneMesure(ZoneMesure zoneMesure) {this.zoneMesure= zoneMesure;}
 }

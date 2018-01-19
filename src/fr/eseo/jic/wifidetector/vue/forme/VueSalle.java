@@ -10,15 +10,22 @@ import javax.swing.JPanel;
 import fr.eseo.jic.wifidetector.modele.Salle;
 import fr.eseo.jic.wifidetector.modele.ZoneMesure;
 
+/**
+ *	Classe représentant la représentation graphique d'une salle
+ *
+ */
 public class VueSalle extends JPanel {
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public static final String PORTE = "Porte";
 
+	/**
+	 * Largeur maximum en pixel de la représentation
+	 */
 	public static final int LARGEUR_MAX = 600;
+	/**
+	 * Hauteur maximum en pixel de la représentation
+	 */
 	public static final int HAUTEUR_MAX = 600;
 
 	private static final int LARGEUR_SALLE_DEFAUT = 500;
@@ -29,9 +36,17 @@ public class VueSalle extends JPanel {
 	private static final int LARGEUR_PORTE = 50;
 	private static final int HAUTEUR_PORTE = 10;
 
+	/**
+	 * La salle à représenter
+	 */
 	private Salle salle;
+	/**
+	 * Liste des représentations des zones de mesure dans la salle
+	 */
 	private List<VueZoneMesure> listeVueZoneMesure;
-
+	/**
+	 * Construit la représentation graphiqua de la salle
+	 */
 	public VueSalle() {
 		super();
 		try {
@@ -113,10 +128,24 @@ public class VueSalle extends JPanel {
 			}
 		}
 	}
-
+	/**
+	 *
+	 * @return La salle représentée par la classe
+	 */
 	public Salle getSalle() {return this.salle;}
+	/**
+	 *
+	 * @param salle La nouvelle salle à représenter
+	 */
 	public void setSalle(Salle salle) {this.salle = salle;}
-
+	/**
+	 *
+	 * @return La liste des représentations des zones de mesure dans la salle
+	 */
 	public List<VueZoneMesure> getListeVueZoneMesure() {return this.listeVueZoneMesure;}
+	/**
+	 *
+	 * @param listeVueZoneMesure La nouvelle liste des représentations des zones de mesure dans la salle
+	 */
 	public void setListeVueZoneMesure(List<VueZoneMesure> listeVueZoneMesure) {this.listeVueZoneMesure = listeVueZoneMesure;}
 }
