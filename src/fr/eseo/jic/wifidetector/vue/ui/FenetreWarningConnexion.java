@@ -91,13 +91,18 @@ public class FenetreWarningConnexion extends JFrame {
 		this.labelSSIDGet.setBounds(310, 305, 152, 29);
 		this.getContentPane().add(this.labelSSIDGet);
 
-		// on centre la fenetre
+		this.centerFenetre();
+	}
+
+	/**
+	 * Centre la fenêtre au centre de l'écran
+	 */
+	private void centerFenetre() {
 		Toolkit tool = this.getToolkit();
 		int largeurEcran = (int) tool.getScreenSize().getWidth();
 		int hauteurEcran = (int) tool.getScreenSize().getHeight();
 		this.pack();
 		this.setLocation((largeurEcran - this.getWidth()) / 2, (hauteurEcran - this.getHeight()) / 2);
-
 	}
 
 	public static FenetreWarningConnexion getInstance() {

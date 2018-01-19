@@ -60,13 +60,11 @@ public class FenetreMesure extends JFrame {
 
 		Traitement traitementProgressBar = new Traitement(this.progressBar);
 		traitementProgressBar.start();
-		// Logo + texte WifiDetection
 
+		// Logo + texte WifiDetection
 		this.labelMenuImage = new JLabel("");
 		this.labelMenuImage.setForeground(Color.BLACK);
 		this.labelMenuImage.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 50));
-		// this.labelMenu.setIcon(new
-		// ImageIcon("/fr/eseo/jic/wifidetector/res/FenetreAccueil/wifi-2.png"));
 		this.labelMenuImage.setIcon(new ImageIcon(this.getClass().getResource("/wifi-2.png")));
 		this.labelMenuImage.setBounds(25, 25, 300, 200);
 		this.getContentPane().add(this.labelMenuImage);
@@ -91,7 +89,13 @@ public class FenetreMesure extends JFrame {
 		this.getContentPane().add(this.returnButton);
 		this.getContentPane().add(this.labelMenuImage);
 
-		// on centre la fenetre
+		this.centerFenetre();
+	}
+
+	/**
+	 * Centre la fenêtre au centre de l'écran
+	 */
+	private void centerFenetre() {
 		Toolkit tool = this.getToolkit();
 		int largeurEcran = (int) tool.getScreenSize().getWidth();
 		int hauteurEcran = (int) tool.getScreenSize().getHeight();
@@ -131,6 +135,7 @@ public class FenetreMesure extends JFrame {
 			if(!this.traitementWifi.running){
 				this.traitementWifi.start();
 			}
+			FenetreMesure.getInstance().getReturnButton().setVisible(false);
 			for (int val = 0; val <= 100; val++) {
 
 				this.progressBar.setValue(val);
@@ -139,7 +144,7 @@ public class FenetreMesure extends JFrame {
 					this.stop();
 				}
 				try {
-					Thread.sleep(200); // rapidité de remplissage de la barre
+					Thread.sleep(150); // rapidité de remplissage de la barre
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -179,16 +184,11 @@ public class FenetreMesure extends JFrame {
 			int debitEntrant = 0;
 			try {
 				debitEntrant = MesureWifi.getSpeedDownFixedTime();
+				System.out.println("Mesure débit terminée");
 			} catch (NoConnectedWifi e) {
 				e.printStackTrace();
 			}
-			int moyenneDebitDescendantGet = 0;
-			try {
-				moyenneDebitDescendantGet = MesureWifi.getAverageSpeed(1);
-			} catch (NoConnectedWifi e) {
-				e.printStackTrace();
-			}
-			FenetreMesure.getInstance().setMesureWifiModel(new MesureWifiModel(qualiteSignal, debitEntrant, moyenneDebitDescendantGet));
+			FenetreMesure.getInstance().setMesureWifiModel(new MesureWifiModel(qualiteSignal, debitEntrant));
 			FenetreCartographieWifi.getInstance().getListeMesureWifiModel().add(FenetreMesure.getInstance().getMesureWifiModel());
 			this.stop();
 		}
@@ -220,4 +220,7 @@ public class FenetreMesure extends JFrame {
 
 	public JProgressBar getProgressBar() {return this.progressBar;}
 	public void setProgressBar(JProgressBar progressBar) {this.progressBar = progressBar;}
+
+	public JButton getReturnButton() {return this.returnButton;}
+	public void setReturnButton(JButton returnButton) {this.returnButton = returnButton;}
 }

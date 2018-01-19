@@ -37,23 +37,17 @@ public class FenetreAffichageAcquisitions extends JFrame {
 
 	private JLabel lblQualiteSignalMin;
 	private JLabel lblDebitEntrantMin;
-	private JLabel lblMoyenneDebitDescendantMin;
 	private JLabel lblQualiteSignalMax;
 	private JLabel lblDebitEntrantMax;
-	private JLabel lblMoyenneDebitDescendantMax;
 	private JLabel lblQualiteSignalMoy;
 	private JLabel lblDebitEntrantMoy;
-	private JLabel lblMoyenneDebitDescendantMoy;
 
 	private JLabel lblQualiteSignalMinInfo;
 	private JLabel lblDebitEntrantMinInfo;
-	private JLabel lblMoyenneDebitDescendantMinInfo;
 	private JLabel lblQualiteSignalMaxInfo;
 	private JLabel lblDebitEntrantMaxInfo;
-	private JLabel lblMoyenneDebitDescendantMaxInfo;
 	private JLabel lblQualiteSignalMoyInfo;
 	private JLabel lblDebitEntrantMoyInfo;
-	private JLabel lblMoyenneDebitDescendantMoyInfo;
 
 	private List<MesureWifiModel> listeMesureWifiModel;
 
@@ -100,13 +94,6 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		this.lblDebitEntrantMoy.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
 		this.lblDebitEntrantMoy.setBounds(80, 220, 222, 30);
 		this.getContentPane().add(this.lblDebitEntrantMoy);
-		// Label texte Moyenne débit descendant
-		this.lblMoyenneDebitDescendantMoy = new JLabel("Moyenne débit descendant (en kb): ");
-		this.lblMoyenneDebitDescendantMoy.setHorizontalAlignment(SwingConstants.LEFT);
-		this.lblMoyenneDebitDescendantMoy.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
-		this.lblMoyenneDebitDescendantMoy.setBounds(80, 260, 320, 30);
-		this.getContentPane().add(this.lblMoyenneDebitDescendantMoy);
-		//Minimum des mesures
 		JLabel labelMinimum = new JLabel("Minimum des mesures:");
 		labelMinimum.setHorizontalAlignment(SwingConstants.LEFT);
 		labelMinimum.setFont(new Font("Helvetica", Font.BOLD, 19));
@@ -124,12 +111,6 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		this.lblDebitEntrantMin.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
 		this.lblDebitEntrantMin.setBounds(80, 380, 222, 30);
 		this.getContentPane().add(this.lblDebitEntrantMin);
-		// Label texte Moyenne débit descendant
-		this.lblMoyenneDebitDescendantMin = new JLabel("Moyenne débit descendant (en kb): ");
-		this.lblMoyenneDebitDescendantMin.setHorizontalAlignment(SwingConstants.LEFT);
-		this.lblMoyenneDebitDescendantMin.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
-		this.lblMoyenneDebitDescendantMin.setBounds(80, 420, 320, 30);
-		this.getContentPane().add(this.lblMoyenneDebitDescendantMin);
 		//Maximum des mesures
 		JLabel labelMaximium = new JLabel("Maximum des mesures:");
 		labelMaximium.setHorizontalAlignment(SwingConstants.LEFT);
@@ -148,12 +129,6 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		this.lblDebitEntrantMax.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
 		this.lblDebitEntrantMax.setBounds(80, 540, 222, 30);
 		this.getContentPane().add(this.lblDebitEntrantMax);
-		// Label texte Moyenne débit descendant
-		this.lblMoyenneDebitDescendantMax = new JLabel("Moyenne débit descendant (en kb): ");
-		this.lblMoyenneDebitDescendantMax.setHorizontalAlignment(SwingConstants.LEFT);
-		this.lblMoyenneDebitDescendantMax.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
-		this.lblMoyenneDebitDescendantMax.setBounds(80, 580, 320, 30);
-		this.getContentPane().add(this.lblMoyenneDebitDescendantMax);
 
 		// Label texte SSID
 		this.labelSSID = new JLabel("Nom du réseau:");
@@ -193,12 +168,6 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		this.lblDebitEntrantMoyInfo.setBounds(457, 221, 152, 29);
 		this.getContentPane().add(this.lblDebitEntrantMoyInfo);
 
-		this.lblMoyenneDebitDescendantMoyInfo.setText(new Integer(this.listeMesureMoyenne.get(2).getValue()).toString());
-		this.lblMoyenneDebitDescendantMoyInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblMoyenneDebitDescendantMoyInfo.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.lblMoyenneDebitDescendantMoyInfo.setBounds(457, 261, 152, 29);
-		this.getContentPane().add(this.lblMoyenneDebitDescendantMoyInfo);
-
 		//Minimum
 		this.lblQualiteSignalMinInfo.setText(new Integer(this.listeMesureMinimum.get(0).getValue()).toString());
 		this.lblQualiteSignalMinInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -211,12 +180,6 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		this.lblDebitEntrantMinInfo.setFont(new Font("Helvetica", Font.PLAIN, 19));
 		this.lblDebitEntrantMinInfo.setBounds(457, 381, 152, 29);
 		this.getContentPane().add(this.lblDebitEntrantMinInfo);
-
-		this.lblMoyenneDebitDescendantMinInfo.setText(new Integer(this.listeMesureMinimum.get(2).getValue()).toString());
-		this.lblMoyenneDebitDescendantMinInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblMoyenneDebitDescendantMinInfo.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.lblMoyenneDebitDescendantMinInfo.setBounds(457, 421, 152, 29);
-		this.getContentPane().add(this.lblMoyenneDebitDescendantMinInfo);
 
 		//Maximum
 		this.lblQualiteSignalMaxInfo.setText(new Integer(this.listeMesureMaximum.get(0).getValue()).toString());
@@ -231,12 +194,6 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		this.lblDebitEntrantMaxInfo.setBounds(457, 541, 152, 29);
 		this.getContentPane().add(this.lblDebitEntrantMaxInfo);
 
-		this.lblMoyenneDebitDescendantMaxInfo.setText(new Integer(this.listeMesureMaximum.get(2).getValue()).toString());
-		this.lblMoyenneDebitDescendantMaxInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblMoyenneDebitDescendantMaxInfo.setFont(new Font("Helvetica", Font.PLAIN, 19));
-		this.lblMoyenneDebitDescendantMaxInfo.setBounds(457, 581, 152, 29);
-		this.getContentPane().add(this.lblMoyenneDebitDescendantMaxInfo);
-
 		/**
 		 * Fin des info que l'on veut afficher
 		 */
@@ -247,13 +204,20 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		this.lblVersion.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 13));
 		this.lblVersion.setBounds(223, 650, 229, 22);
 		this.getContentPane().add(this.lblVersion);
+
 		// on centre la fenetre
+		this.centerFenetre();
+	}
+
+	/**
+	 * Centre la fenêtre au centre de l'écran
+	 */
+	private void centerFenetre() {
 		Toolkit tool = this.getToolkit();
 		int largeurEcran = (int) tool.getScreenSize().getWidth();
 		int hauteurEcran = (int) tool.getScreenSize().getHeight();
 		this.pack();
 		this.setLocation((largeurEcran - this.getWidth()) / 2, (hauteurEcran - this.getHeight()) / 2);
-
 	}
 
 	public static FenetreAffichageAcquisitions getInstance() {
@@ -276,24 +240,18 @@ public class FenetreAffichageAcquisitions extends JFrame {
 
 		this.lblQualiteSignalMinInfo = new JLabel();
 		this.lblDebitEntrantMinInfo = new JLabel();
-		this.lblMoyenneDebitDescendantMinInfo = new JLabel();
 		this.lblQualiteSignalMaxInfo = new JLabel();
 		this.lblDebitEntrantMaxInfo = new JLabel();
-		this.lblMoyenneDebitDescendantMaxInfo = new JLabel();
 		this.lblQualiteSignalMoyInfo = new JLabel();
 		this.lblDebitEntrantMoyInfo = new JLabel();
-		this.lblMoyenneDebitDescendantMoyInfo = new JLabel();
 
 		this.listeJLabelAffichageMesure.add(this.labelInfoReseau);
 		this.listeJLabelAffichageMesure.add(this.lblQualiteSignalMinInfo);
 		this.listeJLabelAffichageMesure.add(this.lblDebitEntrantMinInfo);
-		this.listeJLabelAffichageMesure.add(this.lblMoyenneDebitDescendantMinInfo);
 		this.listeJLabelAffichageMesure.add(this.lblQualiteSignalMaxInfo);
 		this.listeJLabelAffichageMesure.add(this.lblDebitEntrantMaxInfo);
-		this.listeJLabelAffichageMesure.add(this.lblMoyenneDebitDescendantMaxInfo);
 		this.listeJLabelAffichageMesure.add(this.lblQualiteSignalMoyInfo);
 		this.listeJLabelAffichageMesure.add(this.lblDebitEntrantMoyInfo);
-		this.listeJLabelAffichageMesure.add(this.lblMoyenneDebitDescendantMoyInfo);
 
 		this.calculeValeurAffiche();
 	}
@@ -308,13 +266,10 @@ public class FenetreAffichageAcquisitions extends JFrame {
 		if(this.lblQualiteSignalMinInfo != null){
 			this.lblQualiteSignalMinInfo.setText(new Integer(this.listeMesureMinimum.get(0).getValue()).toString());
 			this.lblDebitEntrantMinInfo.setText(new Integer(this.listeMesureMinimum.get(1).getValue()).toString());
-			this.lblMoyenneDebitDescendantMinInfo.setText(new Integer(this.listeMesureMinimum.get(2).getValue()).toString());
 			this.lblQualiteSignalMaxInfo.setText(new Integer(this.listeMesureMaximum.get(0).getValue()).toString());
 			this.lblDebitEntrantMaxInfo.setText(new Integer(this.listeMesureMaximum.get(1).getValue()).toString());
-			this.lblMoyenneDebitDescendantMaxInfo.setText(new Integer(this.listeMesureMaximum.get(2).getValue()).toString());
 			this.lblQualiteSignalMoyInfo.setText(new Integer(this.listeMesureMoyenne.get(0).getValue()).toString());
 			this.lblDebitEntrantMoyInfo.setText(new Integer(this.listeMesureMoyenne.get(1).getValue()).toString());
-			this.lblMoyenneDebitDescendantMoyInfo.setText(new Integer(this.listeMesureMoyenne.get(2).getValue()).toString());
 
 			for(JLabel label : this.listeJLabelAffichageMesure){
 				label.repaint();

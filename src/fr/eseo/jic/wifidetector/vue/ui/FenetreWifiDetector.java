@@ -22,6 +22,7 @@ public class FenetreWifiDetector extends JFrame {
 	private JLabel lblVersion;
 	private JLabel lblQualiteSignal;
 	private JLabel labelSSID;
+	private JLabel labelDebitEntrant;
 	private JButton btnFermer;
 
 	public static final String TITRE_PAR_DEFAUT = "WifiDetector";
@@ -31,11 +32,11 @@ public class FenetreWifiDetector extends JFrame {
 	private static final int HAUTEUR_FENETRE_MIN = 410;
 
 	public static FenetreWifiDetector instance;
-	private JLabel labelMoyenneDebitDescendant;
+	//	private JLabel labelMoyenneDebitDescendant;
 	private JLabel labelSSIDGet;
 	private JLabel labelQualiteSignalGet;
 	private JLabel labelDebitEntrantGet;
-	private JLabel labelMoyenneDebitDescendantGet;
+	//	private JLabel labelMoyenneDebitDescendantGet;
 
 	private FenetreWifiDetector() {
 		// Création de la fenetere
@@ -66,18 +67,12 @@ public class FenetreWifiDetector extends JFrame {
 		this.lblQualiteSignal.setBounds(35, 176, 222, 30);
 		this.getContentPane().add(this.lblQualiteSignal);
 		// Label texte Debit entrant
-		JLabel labelDebitEntrant = new JLabel("Débit entrant (en kb):");
-		labelDebitEntrant.setHorizontalAlignment(SwingConstants.LEFT);
-		labelDebitEntrant.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
-		labelDebitEntrant.setBounds(35, 217, 222, 30);
-		this.getContentPane().add(labelDebitEntrant);
+		this.labelDebitEntrant = new JLabel("Débit entrant (en kb):");
+		this.labelDebitEntrant.setHorizontalAlignment(SwingConstants.LEFT);
+		this.labelDebitEntrant.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
+		this.labelDebitEntrant.setBounds(35, 217, 222, 30);
+		this.getContentPane().add(this.labelDebitEntrant);
 
-		// Label texte Moyenne débit descendant
-		this.labelMoyenneDebitDescendant = new JLabel("Moyenne débit descendant (en kb): ");
-		this.labelMoyenneDebitDescendant.setHorizontalAlignment(SwingConstants.LEFT);
-		this.labelMoyenneDebitDescendant.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
-		this.labelMoyenneDebitDescendant.setBounds(35, 258, 320, 30);
-		this.getContentPane().add(this.labelMoyenneDebitDescendant);
 		// Label version en bas
 		this.lblVersion = new JLabel("Version 1.0 2018. Tous droits réservés.");
 		this.lblVersion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,6 +105,7 @@ public class FenetreWifiDetector extends JFrame {
 		int debitEntrant = 0;
 		try {
 			debitEntrant = MesureWifi.getSpeedDownFixedTime();
+			System.out.println("Mesure debit terminé");
 		} catch (NoConnectedWifi e) {
 			e.printStackTrace();
 		}
@@ -119,21 +115,13 @@ public class FenetreWifiDetector extends JFrame {
 		this.labelDebitEntrantGet.setBounds(391, 217, 114, 30);
 		this.getContentPane().add(this.labelDebitEntrantGet);
 
-		int moyenneDebitDescendantGet = 0;
-		try {
-			moyenneDebitDescendantGet = MesureWifi.getAverageSpeed(1);
-		} catch (NoConnectedWifi e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.centerFenetre();
+	}
 
-		this.labelMoyenneDebitDescendantGet = new JLabel("" + moyenneDebitDescendantGet);
-		this.labelMoyenneDebitDescendantGet.setHorizontalAlignment(SwingConstants.CENTER);
-		this.labelMoyenneDebitDescendantGet.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 19));
-		this.labelMoyenneDebitDescendantGet.setBounds(391, 258, 114, 30);
-		this.getContentPane().add(this.labelMoyenneDebitDescendantGet);
-
-		// on centre la fenetre
+	/**
+	 * Centre la fenêtre au centre de l'écran
+	 */
+	private void centerFenetre() {
 		Toolkit tool = this.getToolkit();
 		int largeurEcran = (int) tool.getScreenSize().getWidth();
 		int hauteurEcran = (int) tool.getScreenSize().getHeight();

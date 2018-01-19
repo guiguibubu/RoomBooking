@@ -164,7 +164,13 @@ public class FenetreCartographieWifi extends JFrame {
 
 		// Bouttons pour terminer les mesures
 
-		// on centre la fenetre
+		this.centerFenetre();
+	}
+
+	/**
+	 * Centre la fenêtre au centre de l'écran
+	 */
+	private void centerFenetre() {
 		Toolkit tool = this.getToolkit();
 		int largeurEcran = (int) tool.getScreenSize().getWidth();
 		int hauteurEcran = (int) tool.getScreenSize().getHeight();

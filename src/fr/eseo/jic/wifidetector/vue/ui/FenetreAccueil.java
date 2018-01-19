@@ -54,17 +54,13 @@ public class FenetreAccueil extends JFrame {
 		this.progressBar.setBounds(25, 300, 350, 50);
 		this.progressBar.setBackground(new Color(255, 255, 255));
 
-		// this.t = new Thread(new Traitement());
-		// this.t.start();
 		Traitement traitementProgressBar = new Traitement(this.progressBar);
 		traitementProgressBar.start();
-		// Logo + texte WifiDetection
 
+		// Logo + texte WifiDetection
 		this.labelMenuImage = new JLabel("");
 		this.labelMenuImage.setForeground(Color.BLACK);
 		this.labelMenuImage.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 50));
-		// this.labelMenu.setIcon(new
-		// ImageIcon("/fr/eseo/jic/wifidetector/res/FenetreAccueil/wifi-2.png"));
 		this.labelMenuImage.setIcon(new ImageIcon(this.getClass().getResource("/wifi-2.png")));
 		this.labelMenuImage.setBounds(25, 25, 300, 200);
 		this.getContentPane().add(this.labelMenuImage);
@@ -90,6 +86,13 @@ public class FenetreAccueil extends JFrame {
 		this.getContentPane().add(this.labelMenuImage);
 
 		// on centre la fenetre
+		this.centerFenetre();
+	}
+
+	/**
+	 * Centre la fenêtre au centre de l'écran
+	 */
+	private void centerFenetre() {
 		Toolkit tool = this.getToolkit();
 		int largeurEcran = (int) tool.getScreenSize().getWidth();
 		int hauteurEcran = (int) tool.getScreenSize().getHeight();
@@ -135,7 +138,7 @@ public class FenetreAccueil extends JFrame {
 					this.stop();
 				}
 				try {
-					Thread.sleep(200); // rapidité de remplissage de la barre
+					Thread.sleep(150); // rapidité de remplissage de la barre
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

@@ -117,6 +117,7 @@ public class ActionMenu extends AbstractAction {
 		if (event.getActionCommand() == NOM_ACTION_ACQUERIR_INFO_RESEAUX) {
 			System.out.println("Prendre info");
 			FenetreMesure.getInstance().setVisible(true);
+			FenetreCartographieWifi.getInstance().setVisible(false);
 			if(FenetreMesure.getInstance().getProgressBar().getValue() == 100){
 				FenetreMesure.getInstance().nouvelleMesure();
 			}

@@ -105,13 +105,18 @@ public class FenetreMenu extends JFrame {
 		this.labelTitreFenetreMenu.setBackground(Color.WHITE);
 		this.getContentPane().add(this.labelTitreFenetreMenu);
 
-		// on centre la fenetre
+		this.centerFenetre();
+	}
+
+	/**
+	 * Centre la fenêtre au centre de l'écran
+	 */
+	private void centerFenetre() {
 		Toolkit tool = this.getToolkit();
 		int largeurEcran = (int) tool.getScreenSize().getWidth();
 		int hauteurEcran = (int) tool.getScreenSize().getHeight();
 		this.pack();
 		this.setLocation((largeurEcran - this.getWidth()) / 2, (hauteurEcran - this.getHeight()) / 2);
-
 	}
 
 	public static FenetreMenu getInstance() {
