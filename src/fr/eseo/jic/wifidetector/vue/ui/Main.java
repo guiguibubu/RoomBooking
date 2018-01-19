@@ -13,7 +13,6 @@ public class Main {
 
 			@Override
 			public void run() {
-
 				try {
 					Warning();
 				} catch (IOException e) {
@@ -21,14 +20,6 @@ public class Main {
 					// on affiche le pop up
 					FenetreWarningConnexion.getInstance().setVisible(true);
 				}
-
-				// FenetreAccueil.getInstance().setVisible(true);
-				// FenetreMenu.getInstance().setVisible(true);
-				// FenetrePartition.getInstance().setVisible(true);
-				// FenetreWifiDetection.getInstance().setVisible(true);
-				// WarningCalibration.getInstance().setVisible(true);
-				//FenetreCartographieWifi.getInstance().setVisible(true);
-
 			}
 		});
 	}
@@ -57,9 +48,6 @@ public class Main {
 			// on affiche le pop up
 			FenetreWarningConnexion.getInstance().setVisible(true);
 		} else {
-			//			System.out.println(MesureWifi.getCurrentSsid());
-			// on enlève la fenetre pop up
-			//			FenetreWarningConnexion.getInstance().setVisible(false);
 			// on affiche la fenetre d'accueil
 			FenetreAccueil.getInstance().setVisible(true);
 		}

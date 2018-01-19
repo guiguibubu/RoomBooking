@@ -1,6 +1,6 @@
 package fr.eseo.jic.wifidetector.modele;
 
-public abstract class Mesure {
+public class Mesure {
 
 	private int value;
 	private String name;

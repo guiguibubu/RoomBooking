@@ -93,12 +93,6 @@ public class FenetreWifiDetector extends JFrame {
 		this.btnFermer.setActionCommand(ActionMenu.NOM_ACTION_FERMER);
 		this.getContentPane().add(this.btnFermer);
 
-		// System.out.println("Signal : " +
-		// MesureWifi.getSignal("Livebox-jeroboam"));
-		// System.out.println("Signal : " +
-		// MesureWifi.getSignal(MesureWifi.getCurrentSsid()));
-		//		System.out.println("Signal : " + MesureWifi.getSignal(MesureWifi.WIFI_ETUDIANT));
-		// String nomSignal = MesureWifi.getCurrentSsid();
 		String nomSignal = MesureWifi.WIFI_ETUDIANT;
 		this.labelSSIDGet = new JLabel(nomSignal);
 		this.labelSSIDGet.setHorizontalAlignment(SwingConstants.CENTER);
@@ -106,9 +100,6 @@ public class FenetreWifiDetector extends JFrame {
 		this.labelSSIDGet.setBounds(391, 135, 152, 30);
 		this.getContentPane().add(this.labelSSIDGet);
 
-		// int qualiteSignal = MesureWifi.getSignal("Livebox-jeroboam");
-		// int qualiteSignal =
-		// MesureWifi.getSignal(MesureWifi.getCurrentSsid());
 		int qualiteSignal = MesureWifi.getSignal(MesureWifi.WIFI_ETUDIANT);
 		this.labelQualiteSignalGet = new JLabel("" + qualiteSignal);
 		this.labelQualiteSignalGet.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,7 +111,6 @@ public class FenetreWifiDetector extends JFrame {
 		try {
 			debitEntrant = MesureWifi.getSpeedDownFixedTime();
 		} catch (NoConnectedWifi e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.labelDebitEntrantGet = new JLabel("" + debitEntrant);

@@ -200,7 +200,7 @@ public class MesureWifi {
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(cmd.getInputStream()));
 			String line = reader.readLine();
-			
+
 			while(line != null)
 			{
 				line = reader.readLine();
@@ -220,7 +220,6 @@ public class MesureWifi {
 
 	private static int dbmToPercentage(double signalDbm)
 	{
-		System.out.println(signalDbm);
 		int signalPercentage = 0;
 		if (signalDbm <= -100)
 		{

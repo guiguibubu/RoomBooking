@@ -84,7 +84,6 @@ public class FenetreWarningConnexion extends JFrame {
 		this.btnFermer.setActionCommand(ActionMenu.NOM_ACTION_CLOSE);
 		this.getContentPane().add(this.btnFermer);
 
-		//		System.out.println("Signal : " + MesureWifi.getSignal(MesureWifi.WIFI_ETUDIANT));
 		String nomSignal = MesureWifi.WIFI_ETUDIANT;
 		this.labelSSIDGet = new JLabel(nomSignal);
 		this.labelSSIDGet.setHorizontalAlignment(SwingConstants.CENTER);

@@ -92,7 +92,6 @@ public class VueSalle extends JPanel {
 			this.listeVueZoneMesure.clear();
 			for (int i = 0; i<nbZoneMesure; i++){
 				ZoneMesure zoneMesure = this.salle.getListeZoneMesure().get(i);
-				System.out.println("avant "+zoneMesure);
 				int largeurMesure = (ratio > 0.0) ? Math.toIntExact(Math.round(zoneMesure.getLargeur()/ratio)) : zoneMesure.getLargeur();
 				int hauteurMesure = (ratio > 0.0) ? Math.toIntExact(Math.round(zoneMesure.getHauteur()/ratio)) : zoneMesure.getHauteur();
 				int xZone = (ratio > 0.0) ? xSalle + Math.toIntExact(Math.round(zoneMesure.getX()/ratio)) : xSalle + zoneMesure.getX();
@@ -102,7 +101,6 @@ public class VueSalle extends JPanel {
 					zoneMesure.setHauteur(hauteurMesure);
 					zoneMesure.setX(xZone);
 					zoneMesure.setY(yZone);
-					System.out.println("après "+zoneMesure);
 					this.listeVueZoneMesure.add(new VueZoneMesure(zoneMesure));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);

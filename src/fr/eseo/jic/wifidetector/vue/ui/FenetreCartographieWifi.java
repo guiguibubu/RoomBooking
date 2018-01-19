@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import fr.eseo.jic.wifidetector.modele.ZoneMesure;
+import fr.eseo.jic.wifidetector.modele.MesureWifiModel;
 import fr.eseo.jic.wifidetector.vue.forme.VueSalle;
 
 public class FenetreCartographieWifi extends JFrame {
@@ -42,8 +44,13 @@ public class FenetreCartographieWifi extends JFrame {
 	private JLabel lblLargeur;
 	private JLabel labelHauteur;
 	private JButton buttonValiderDimensions;
+	private JButton buttonMesurer;
+
+	private List<MesureWifiModel> listeMesureWifiModel;
 
 	public FenetreCartographieWifi() {
+
+		this.listeMesureWifiModel = new ArrayList<MesureWifiModel>();
 		// Création de la fenetre
 		this.setResizable(true);
 		this.getContentPane().setBackground(COLOR_PAR_DEFAUT);
@@ -76,7 +83,7 @@ public class FenetreCartographieWifi extends JFrame {
 		// Label version en bas
 		this.lblVersion = new JLabel("Version 1.0 2018. Tous droits réservés.");
 		this.lblVersion.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		this.lblVersion.setBounds(297, 913, 229, 22);
+		this.lblVersion.setBounds(297, 930, 229, 22);
 		this.getContentPane().add(this.lblVersion);
 
 		this.lblLargeur = new JLabel("Largeur (en m):");
@@ -92,7 +99,7 @@ public class FenetreCartographieWifi extends JFrame {
 		// Boutton fermer fenetre
 		this.btnFermer = new JButton(new ActionMenu());
 		this.btnFermer.setFont(new Font("Helvetica", Font.PLAIN, 17));
-		this.btnFermer.setBounds(667, 883, 87, 51);
+		this.btnFermer.setBounds(667, 883, 87, 40);
 		this.btnFermer.setText("Retour");
 		this.btnFermer.setActionCommand(ActionMenu.NOM_ACTION_RETOUR_MENU);
 		this.getContentPane().add(this.btnFermer);
@@ -110,19 +117,19 @@ public class FenetreCartographieWifi extends JFrame {
 		this.buttonAfficherResultat.setText("Afficher résultat");
 		this.buttonAfficherResultat.setFont(new Font("Helvetica", Font.PLAIN, 17));
 		this.buttonAfficherResultat.setActionCommand(ActionMenu.NOM_ACTION_AFFICHER_RESULTAT);
-		this.buttonAfficherResultat.setBounds(30, 883, 189, 51);
+		this.buttonAfficherResultat.setBounds(30, 883, 189, 40);
 		this.getContentPane().add(this.buttonAfficherResultat);
 
 		// label texte
 		this.labelLargeurSalle = new JLabel("Largeur");
 		this.labelLargeurSalle.setHorizontalAlignment(SwingConstants.CENTER);
 		this.labelLargeurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
-		this.labelLargeurSalle.setBounds(405, 846, 93, 34);
+		this.labelLargeurSalle.setBounds(370, 846, 93, 34);
 		this.getContentPane().add(this.labelLargeurSalle);
 
 		this.lblHauteurSalle = new JLabel("Hauteur");
 		this.lblHauteurSalle.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblHauteurSalle.setBounds(20, 436, 82, 29);
+		this.lblHauteurSalle.setBounds(20, 500, 82, 29);
 		this.getContentPane().add(this.lblHauteurSalle);
 		this.lblHauteurSalle.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
@@ -142,11 +149,20 @@ public class FenetreCartographieWifi extends JFrame {
 		this.panelSalle.setBounds(114, 214, 620, 620);
 		this.panelSalle.setBackground(COLOR_PAR_DEFAUT);
 		this.getContentPane().add(this.panelSalle);
-		System.out.println("Création panel "+this.panelSalle.hashCode());
 
 		ActionListenerEnter actionListener = new ActionListenerEnter(this.panelSalle, this.textFieldLargeur, this.textFieldHauteur);
 		this.textFieldLargeur.addActionListener(actionListener);
 		this.textFieldHauteur.addActionListener(actionListener);
+
+		// Bouttons pour mesurer
+		this.buttonMesurer = new JButton(new ActionMenu());
+		this.buttonMesurer.setText("Mesurer");
+		this.buttonMesurer.setFont(new Font("Helvetica", Font.PLAIN, 17));
+		this.buttonMesurer.setActionCommand(ActionMenu.NOM_ACTION_ACQUERIR_INFO_RESEAUX);
+		this.buttonMesurer.setBounds(360, 883, 110, 40);
+		this.getContentPane().add(this.buttonMesurer);
+
+		// Bouttons pour terminer les mesures
 
 		// on centre la fenetre
 		Toolkit tool = this.getToolkit();
@@ -179,8 +195,6 @@ public class FenetreCartographieWifi extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String largeurStr = this.textFieldLargeur.getText();
 			String hauteurStr = this.textFieldHauteur.getText();
-			System.out.println("Largeur " + largeurStr);
-			System.out.println("Hauteur " + hauteurStr);
 			try {
 				int largeur = new Integer(largeurStr);
 				int hauteur = new Integer(hauteurStr);
@@ -188,9 +202,6 @@ public class FenetreCartographieWifi extends JFrame {
 				this.vueSalle.getSalle().setLargeur(largeur);
 				this.vueSalle.getSalle().calculListePointMesure();
 				this.vueSalle.repaint();
-				for (ZoneMesure zoneMesure : this.vueSalle.getSalle().getListeZoneMesure()) {
-					System.out.println(zoneMesure);
-				}
 			} catch (NumberFormatException e1) {
 				JOptionPane.showMessageDialog(null, "Merci de saisir des chiffres", "Erreur",
 						JOptionPane.ERROR_MESSAGE);
@@ -210,4 +221,7 @@ public class FenetreCartographieWifi extends JFrame {
 
 	public JTextField getTextFieldHauteur() {return this.textFieldHauteur;}
 	public void setTextFieldHauteur(JTextField textFieldHauteur) {this.textFieldHauteur = textFieldHauteur;}
+
+	public List<MesureWifiModel> getListeMesureWifiModel() {return this.listeMesureWifiModel;}
+	public void setListeMesureWifiModel(List<MesureWifiModel> listeMesureWifiModel) {this.listeMesureWifiModel = listeMesureWifiModel;}
 }

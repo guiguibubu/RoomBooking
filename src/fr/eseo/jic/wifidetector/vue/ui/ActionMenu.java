@@ -1,9 +1,12 @@
 package fr.eseo.jic.wifidetector.vue.ui;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
+
+import fr.eseo.jic.wifidetector.modele.MesureWifiModel;
 
 public class ActionMenu extends AbstractAction {
 	private static final long serialVersionUID = 1L;
@@ -44,6 +47,7 @@ public class ActionMenu extends AbstractAction {
 			System.out.println("Carto wifi");
 			FenetreCartographieWifi.getInstance().setVisible(true);
 			FenetreMenu.getInstance().setVisible(false);
+			FenetreMesure.getInstance().dispose();
 		}
 		// Retour au menu après la fenetre wifi detector
 		if (event.getActionCommand() == NOM_ACTION_RETOUR) {
@@ -55,6 +59,7 @@ public class ActionMenu extends AbstractAction {
 		if (event.getActionCommand() == NOM_ACTION_RETOUR_MENU) {
 			System.out.println("Retour menu apres carto");
 			FenetreCartographieWifi.getInstance().setVisible(false);
+			FenetreAffichageAcquisitions.getInstance().setVisible(false);
 			FenetreMenu.getInstance().setVisible(true);
 		}
 		// Fermeture du programme
@@ -101,15 +106,20 @@ public class ActionMenu extends AbstractAction {
 			System.out.println("Dimension validées");
 			FenetreAffichageAcquisitions.getInstance().setVisible(true);
 			FenetreCartographieWifi.getInstance().setVisible(false);
-			// Ajouter des instructions ici
+			FenetreAffichageAcquisitions.getInstance().setListeMesureWifiModel(new ArrayList<MesureWifiModel>(FenetreCartographieWifi.getInstance().getListeMesureWifiModel()));
+			FenetreCartographieWifi.getInstance().getListeMesureWifiModel().clear();
+			FenetreAffichageAcquisitions.getInstance().calculeValeurAffiche();
 		}
 		/**
 		 * Instructions à ajouter ici pour le bouton acquisition des info réseaux
-		 * 
+		 *
 		 */
 		if (event.getActionCommand() == NOM_ACTION_ACQUERIR_INFO_RESEAUX) {
 			System.out.println("Prendre info");
-			// Ajouter des instructions ici
+			FenetreMesure.getInstance().setVisible(true);
+			if(FenetreMesure.getInstance().getProgressBar().getValue() == 100){
+				FenetreMesure.getInstance().nouvelleMesure();
+			}
 		}
 
 	}
