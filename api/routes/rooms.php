@@ -22,6 +22,11 @@ if ($method === 'GET') {
 
 } elseif ($method === 'POST') {
 	//can update any field for a given room
+	if(!check(['GET' => ['id']])) {
+		echo json_encode(['done' => false, 'info' => 'Missing GET parameter id']);
+		exit;
+	}
+	
 	$id = intval($_GET['id']);
 	$fieldsToUpdate = [];
 	$values = [];

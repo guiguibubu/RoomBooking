@@ -9,10 +9,13 @@ header('Content-Type: application/json');
 include "tools/bdd.php";
 include "tools/misc.php";
 
+
 $query = strtok($_SERVER['REQUEST_URI'], '?');
 $method = $_SERVER['REQUEST_METHOD'];
 
 $query = explode('/', $query);
+
+
 
 
 array_shift($query);
@@ -20,6 +23,11 @@ array_shift($query);
 
 array_shift($query);
 //get rid of api prefix
+
+if(!file_exists("routes/" . implode('.', $query) . ".php")) {
+	echo json_encode(['error' => 'This path does not exists']);
+	exit;
+}
 
 $_USER = [];
 

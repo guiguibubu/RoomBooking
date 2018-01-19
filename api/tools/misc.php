@@ -26,19 +26,26 @@ function genUpdateSQL($table, $fields, $id) {
 	$values = [];
 
 	foreach ($fields as $field) {
-		$fieldsStr[] = $field . ' = ?'; 
+		$fieldsStr[] = $field . ' = ?';
 	}
 
 	return 'UPDATE ' . $table . ' SET ' . implode(',', $fieldsStr) . ' WHERE id = ' . $id;
 }
 
-
-
 function isJSON($string) {
- json_decode($string);
- return (json_last_error() == JSON_ERROR_NONE);
+	json_decode($string);
+	return (json_last_error() == JSON_ERROR_NONE);
 }
 
-
-
+function check($conf) {
+	$pass = true;
+	foreach ($conf as $method => $value) {
+		global ${'_' . $method};
+		foreach ($value as $p) {
+			if (empty(${'_' . $method}[$p]))
+				$pass = false;
+		}
+	}
+	return $pass;
+}
 ?>
