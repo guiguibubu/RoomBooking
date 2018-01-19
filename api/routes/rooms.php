@@ -1,14 +1,16 @@
 <?php
-$fields = ['name', 'type', 'capacity', 'width', 'length', 'comment', 'floor', 'building', 'location'];
+
 
 if ($method === 'GET') {
 	if (empty($_GET)) {
+		//called with parameters
 
 		$req = $db -> query('SELECT * FROM rooms;');
 		$out = $req -> fetchAll(PDO::FETCH_ASSOC);
 
 	} elseif (!empty($_GET['id'])) {
-
+		//called with ?id=xx
+		//get the room and all of its bookings
 		$data = $db -> query('SELECT * FROM rooms LEFT OUTER JOIN bookings ON (bookings.room_id = rooms.id) WHERE rooms.id = ' . intval($_GET['id'])) -> fetchAll(PDO::FETCH_ASSOC);
 		$out = extractFields($data, ['name', 'type', 'capacity', 'comment', 'floor', 'building', 'location'], ['width', 'length', 'room_id']);
 
@@ -21,7 +23,7 @@ if ($method === 'GET') {
 	echo json_encode($out);
 
 } elseif ($method === 'POST') {
-	//can update any field for a given room
+	//update any field for a given room
 	if(!check(['GET' => ['id']])) {
 		echo json_encode(['done' => false, 'info' => 'Missing GET parameter id']);
 		exit;
@@ -29,6 +31,7 @@ if ($method === 'GET') {
 	
 	$id = intval($_GET['id']);
 	$fieldsToUpdate = [];
+	$fields = ['name', 'type', 'capacity', 'width', 'length', 'comment', 'floor', 'building', 'location'];
 	$values = [];
 	foreach ($_POST as $field => $value) {
 		if (in_array($field, $fields)) {
@@ -37,7 +40,7 @@ if ($method === 'GET') {
 		}
 	}
 
-	$prep = $db -> prepare(genUpdateSQL('rooms', $fieldsToUpdate, $id));
+	$prep = $db -> prepare(genUpdateSQL('rooms', $fieldsToUpdate, $id)); //function in misc tools because it could be reused
 
 	echo json_encode(array('done' => ($prep -> execute($values))));
 

@@ -1,13 +1,14 @@
 <?php
 
-function res($data) {
-	$type = gettype($data);
-	echo $data;
-	//if($type === "string")
-	//echo json_encode()
-}
+/*
+ * 
+ * Misc tools for various tasks
+ * Reused in many places
+ * 
+ */
 
 function extractFields(&$data, $fields, $ignoredFields) {
+	//sanitize whole array of room + bookings fields
 	$out = [];
 	foreach ($fields as $field) {
 		$out[$field] = $data[0][$field];
@@ -32,11 +33,6 @@ function genUpdateSQL($table, $fields, $id) {
 	return 'UPDATE ' . $table . ' SET ' . implode(',', $fieldsStr) . ' WHERE id = ' . $id;
 }
 
-function isJSON($string) {
-	json_decode($string);
-	return (json_last_error() == JSON_ERROR_NONE);
-}
-
 function check($conf) {
 	$pass = true;
 	foreach ($conf as $method => $value) {
@@ -48,4 +44,12 @@ function check($conf) {
 	}
 	return $pass;
 }
+
+
+//from stackoverflow
+function isJSON($string) {
+	json_decode($string);
+	return (json_last_error() == JSON_ERROR_NONE);
+}
+
 ?>
